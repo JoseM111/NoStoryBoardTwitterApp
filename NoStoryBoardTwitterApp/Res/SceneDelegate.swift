@@ -19,7 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: scene)
         // MARK: #©Adding our new main root controller
-        window?.rootViewController = MainTabController()
+//        window?.rootViewController = MainTabController()
+        window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
         // Shows the window and makes it the key window.
         window?.makeKeyAndVisible()
     }
