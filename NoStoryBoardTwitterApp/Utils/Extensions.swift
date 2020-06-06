@@ -62,33 +62,3 @@ extension UIColor {
 
     static let twitterBlue = UIColor.rgb(red: 29, green: 161, blue: 242)
 }
-
-// MARK: - UIViewController
-extension UIViewController {
-
-    func addAllSubViews(obj1: UIView , obj2: UIView = UIView(), obj3: UIView = UIView()) {
-        // MARK: -#[subview-additions]
-        view.addSubview(obj1)
-        view.addSubview(obj2)
-        view.addSubview(obj3)
-    }
-
-//    func createStackView(axis: NSLayoutConstraint.Axis, vStack: UIStackView, obj: UIView, spacing: CGFloat, paddingTop: CGFloat, paddingLeft : CGFloat, paddingRight: CGFloat) {
-//        vStack.axis = axis
-//        vStack.spacing = spacing
-//
-//        view.addSubview(vStack)
-//        vStack.anchorWith(top: obj.bottomAnchor, left: view.leftAnchor,
-//                right: view.rightAnchor, paddingTop: paddingTop,
-//                paddingLeft: paddingLeft, paddingRight: paddingRight)
-//    }
-//
-//    func imgConstraints(obj: UIView,  ht: CGFloat, wt: CGFloat, paddingTop: CGFloat) { // Centering it on the x-axis
-//        obj.centerX(inView: view)
-//        // Setting the dimensions
-//        obj.setDimensions(width: ht, height: ht)
-//
-//        // Anchoring it to the top & giving it a padding of 32
-//        obj.anchorWith(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: paddingTop)
-//    }
-}

@@ -14,48 +14,55 @@ class LoginViewController: UIViewController {
         return twitterImg
     }()
 
-    // MARK: _©Container Views with properties
+    // MARK: _©Container-views-with-properties
     /**©-----------------------©*/
     internal lazy var emailContainerView: UIView = {
         let uiView = UIView()
-        uiView.backgroundColor = .red
-        uiView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        let uiImgView = UIImageView()
+        let mailImg: String = "ic_mail_outline_white_2x-1"
 
-        // Creating a image view in our container
-        let emailImgUIView = UIImageView()
-        emailImgUIView.image = UIImage(named: "ic_mail_outline_white_2x-1")
-        // Adding the emailImgUIView to the container parent view
-        uiView.addSubview(emailImgUIView)
+        let containerView: UIView = Utilities.inputContainerViewWith(
+                uiView: uiView, uiImgView: uiImgView, named: mailImg,
+                anchorPaddingLeft: 8, anchorPaddingBottom: 8,
+                dimensionWidth: 24, dimensionHeight: 24, txtField: emailTxtField)
 
-        // Adding constraints
-        emailImgUIView.anchorWith(left: uiView.leftAnchor, bottom: uiView.bottomAnchor, paddingLeft: 8, paddingBottom: 8)
-        // Sets the size of the image inside the uiview
-        emailImgUIView.setDimensions(width: 24, height: 24)
-
-        return uiView
+        return containerView
     }()
 
     internal lazy var pwdContainerView: UIView = {
         let uiView = UIView()
-        uiView.backgroundColor = .systemPurple
-        uiView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        let uiImgView = UIImageView()
+        let lockImg: String = "ic_lock_outline_white_2x"
 
-        // Creating a image view in our container
-        let pwdImgUIView = UIImageView()
-        pwdImgUIView.image = UIImage(named: "ic_lock_outline_white_2x")
-        // Adding the pwdImgUIView to the container parent view
-        uiView.addSubview(pwdImgUIView)
+        let containerView: UIView = Utilities.inputContainerViewWith(
+                uiView: uiView, uiImgView: uiImgView, named: lockImg,
+                anchorPaddingLeft: 8, anchorPaddingBottom: 8,
+                dimensionWidth: 24, dimensionHeight: 24, txtField: pwdTxtField)
 
-        // Adding constraints
-        pwdImgUIView.anchorWith(left: uiView.leftAnchor, bottom: uiView.bottomAnchor, paddingLeft: 8, paddingBottom: 8)
-        // Sets the size of the image inside the uiview
-        pwdImgUIView.setDimensions(width: 24, height: 24)
+        return containerView
+    }()
+    /**© END ©Container views with properties ©*/
 
-        return uiView
+    // MARK: _©Text-views
+    /**©-----------------------©*/
+    internal let emailTxtField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Email..."
+
+
+        return tf
     }()
 
+    internal let pwdTxtField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Password..."
 
-    /**©-----------------------©*/
+
+        return tf
+    }()
+
+    /**© END ©Text views ©*/
+
     /**©------------------------------------------------------------------------------©*/
 
     // MARK: _©Lifecycle-methods
