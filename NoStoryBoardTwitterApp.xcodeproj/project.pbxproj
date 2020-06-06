@@ -7,23 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9EEA71556CC6137EF1338736 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA789AFAF607DAEEE540F6 /* Extensions.swift */; };
+		9EEA74E6188EB2FDFA7311F1 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA731B53AD919FC90BD62A /* MainTabController.swift */; };
+		9EEA77FA026CDC26212A8681 /* ConvoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7BA11585FEFC93E4DED5 /* ConvoViewController.swift */; };
+		9EEA780654506AE9BADCB3D2 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7811859BB2917ED51146 /* NotificationViewController.swift */; };
+		9EEA7923AEDFD4D9D1FD7AB8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA77E8B1947435FED772B8 /* RegistrationViewController.swift */; };
+		9EEA7A677B8A4E5362F972C3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA762E949774048CD62539 /* FeedViewController.swift */; };
+		9EEA7BA905473597A79587BA /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7962157E5D81AA2224E6 /* ExploreViewController.swift */; };
+		9EEA7BD89A2718B61CB0E9CD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7C853017A97191BC5C46 /* LoginViewController.swift */; };
 		ABB981E2248AE89400AF2C88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB981E1248AE89400AF2C88 /* AppDelegate.swift */; };
 		ABB981E4248AE89400AF2C88 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB981E3248AE89400AF2C88 /* SceneDelegate.swift */; };
-		ABB981E6248AE89400AF2C88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB981E5248AE89400AF2C88 /* ViewController.swift */; };
 		ABB981E9248AE89400AF2C88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABB981E7248AE89400AF2C88 /* Main.storyboard */; };
 		ABB981EB248AE89600AF2C88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABB981EA248AE89600AF2C88 /* Assets.xcassets */; };
 		ABB981EE248AE89600AF2C88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABB981EC248AE89600AF2C88 /* LaunchScreen.storyboard */; };
+		ABB981FE248AE9AF00AF2C88 /* MyTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB981FD248AE9AF00AF2C88 /* MyTools.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9EEA731B53AD919FC90BD62A /* MainTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		9EEA762E949774048CD62539 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		9EEA77E8B1947435FED772B8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		9EEA7811859BB2917ED51146 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		9EEA789AFAF607DAEEE540F6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9EEA7962157E5D81AA2224E6 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		9EEA7BA11585FEFC93E4DED5 /* ConvoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvoViewController.swift; sourceTree = "<group>"; };
+		9EEA7C853017A97191BC5C46 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ABB981DE248AE89400AF2C88 /* NoStoryBoardTwitterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoStoryBoardTwitterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB981E1248AE89400AF2C88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABB981E3248AE89400AF2C88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ABB981E5248AE89400AF2C88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ABB981E8248AE89400AF2C88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ABB981EA248AE89600AF2C88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABB981ED248AE89600AF2C88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABB981EF248AE89600AF2C88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABB981FD248AE9AF00AF2C88 /* MyTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +53,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9EEA72FE102AE6CEB9C3F309 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				9EEA7C853017A97191BC5C46 /* LoginViewController.swift */,
+				9EEA77E8B1947435FED772B8 /* RegistrationViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		9EEA7DD7BFA832D448076419 /* ModelController */ = {
+			isa = PBXGroup;
+			children = (
+				9EEA731B53AD919FC90BD62A /* MainTabController.swift */,
+			);
+			path = ModelController;
+			sourceTree = "<group>";
+		};
+		9EEA7E2B7B9211F5D2ECBAFA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9EEA762E949774048CD62539 /* FeedViewController.swift */,
+				9EEA7962157E5D81AA2224E6 /* ExploreViewController.swift */,
+				9EEA7811859BB2917ED51146 /* NotificationViewController.swift */,
+				9EEA7BA11585FEFC93E4DED5 /* ConvoViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		ABB981D5248AE89400AF2C88 = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +100,83 @@
 		ABB981E0248AE89400AF2C88 /* NoStoryBoardTwitterApp */ = {
 			isa = PBXGroup;
 			children = (
-				ABB981E1248AE89400AF2C88 /* AppDelegate.swift */,
-				ABB981E3248AE89400AF2C88 /* SceneDelegate.swift */,
-				ABB981E5248AE89400AF2C88 /* ViewController.swift */,
-				ABB981E7248AE89400AF2C88 /* Main.storyboard */,
-				ABB981EA248AE89600AF2C88 /* Assets.xcassets */,
-				ABB981EC248AE89600AF2C88 /* LaunchScreen.storyboard */,
-				ABB981EF248AE89600AF2C88 /* Info.plist */,
+				ABB981FA248AE8DC00AF2C88 /* Models */,
+				ABB981F9248AE8DB00AF2C88 /* Views */,
+				ABB981F8248AE8D900AF2C88 /* ViewModels */,
+				ABB981F7248AE8D700AF2C88 /* Controllers */,
+				ABB981F6248AE8D500AF2C88 /* API */,
+				ABB981F5248AE8D200AF2C88 /* Utils */,
+				ABB981FB248AE8EE00AF2C88 /* Res */,
 			);
 			path = NoStoryBoardTwitterApp;
+			sourceTree = "<group>";
+		};
+		ABB981F5248AE8D200AF2C88 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				ABB981FD248AE9AF00AF2C88 /* MyTools.swift */,
+				9EEA789AFAF607DAEEE540F6 /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		ABB981F6248AE8D500AF2C88 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		ABB981F7248AE8D700AF2C88 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9EEA7DD7BFA832D448076419 /* ModelController */,
+				9EEA7E2B7B9211F5D2ECBAFA /* ViewControllers */,
+				9EEA72FE102AE6CEB9C3F309 /* Authentication */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		ABB981F8248AE8D900AF2C88 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		ABB981F9248AE8DB00AF2C88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ABB981FC248AE91E00AF2C88 /* Storyboards */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ABB981FA248AE8DC00AF2C88 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		ABB981FB248AE8EE00AF2C88 /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				ABB981E1248AE89400AF2C88 /* AppDelegate.swift */,
+				ABB981E3248AE89400AF2C88 /* SceneDelegate.swift */,
+				ABB981EA248AE89600AF2C88 /* Assets.xcassets */,
+				ABB981EF248AE89600AF2C88 /* Info.plist */,
+			);
+			path = Res;
+			sourceTree = "<group>";
+		};
+		ABB981FC248AE91E00AF2C88 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				ABB981E7248AE89400AF2C88 /* Main.storyboard */,
+				ABB981EC248AE89600AF2C88 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +250,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABB981E6248AE89400AF2C88 /* ViewController.swift in Sources */,
 				ABB981E2248AE89400AF2C88 /* AppDelegate.swift in Sources */,
 				ABB981E4248AE89400AF2C88 /* SceneDelegate.swift in Sources */,
+				ABB981FE248AE9AF00AF2C88 /* MyTools.swift in Sources */,
+				9EEA74E6188EB2FDFA7311F1 /* MainTabController.swift in Sources */,
+				9EEA7A677B8A4E5362F972C3 /* FeedViewController.swift in Sources */,
+				9EEA7BA905473597A79587BA /* ExploreViewController.swift in Sources */,
+				9EEA780654506AE9BADCB3D2 /* NotificationViewController.swift in Sources */,
+				9EEA77FA026CDC26212A8681 /* ConvoViewController.swift in Sources */,
+				9EEA71556CC6137EF1338736 /* Extensions.swift in Sources */,
+				9EEA7BD89A2718B61CB0E9CD /* LoginViewController.swift in Sources */,
+				9EEA7923AEDFD4D9D1FD7AB8 /* RegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +406,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8R94WS9HFC;
-				INFOPLIST_FILE = NoStoryBoardTwitterApp/Info.plist;
+				INFOPLIST_FILE = NoStoryBoardTwitterApp/Res/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +424,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8R94WS9HFC;
-				INFOPLIST_FILE = NoStoryBoardTwitterApp/Info.plist;
+				INFOPLIST_FILE = NoStoryBoardTwitterApp/Res/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
