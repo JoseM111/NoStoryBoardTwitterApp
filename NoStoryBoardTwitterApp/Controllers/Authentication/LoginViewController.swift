@@ -2,6 +2,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    // MARK: _©Utilities-typealias
+    typealias u = Utilities
+
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
     internal let twitterLogoImgView: UIImageView = {
@@ -21,7 +24,7 @@ class LoginViewController: UIViewController {
         let uiImgView = UIImageView()
         let mailImg: String = "ic_mail_outline_white_2x-1"
 
-        let containerView: UIView = Utilities.inputContainerViewWith(
+        let containerView: UIView = u.inputContainerViewWith(
                 uiView: uiView, uiImgView: uiImgView, named: mailImg,
                 anchorPaddingLeft: 8, anchorPaddingBottom: 8,
                 dimensionWidth: 24, dimensionHeight: 24, txtField: emailTxtField)
@@ -34,7 +37,7 @@ class LoginViewController: UIViewController {
         let uiImgView = UIImageView()
         let lockImg: String = "ic_lock_outline_white_2x"
 
-        let containerView: UIView = Utilities.inputContainerViewWith(
+        let containerView: UIView = u.inputContainerViewWith(
                 uiView: uiView, uiImgView: uiImgView, named: lockImg,
                 anchorPaddingLeft: 8, anchorPaddingBottom: 8,
                 dimensionWidth: 24, dimensionHeight: 24, txtField: pwdTxtField)
@@ -43,25 +46,51 @@ class LoginViewController: UIViewController {
     }()
     /**© END ©Container views with properties ©*/
 
-    // MARK: _©Text-views
+    // MARK: _©Text-fields
     /**©-----------------------©*/
     internal let emailTxtField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "Email..."
-
-
+        let email: String = "Email"
+        let tf: UITextField = u.textFieldWith(placeHolder: email, fontSize: 16)
         return tf
     }()
 
     internal let pwdTxtField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "Password..."
+        let pwd: String = "Password"
+        let tf: UITextField = u.textFieldWith(placeHolder: pwd, fontSize: 16)
 
-
+        /* Adding this line of code to secure the text entry. Meaning the
+           password text will look like --> ....... when typed
+           [NOTE] CMD + K pops up and dismisses the keyboard on the simulator */
+        tf.isSecureTextEntry = true
         return tf
     }()
 
     /**© END ©Text views ©*/
+
+    // MARK: #©Login-button
+    internal let loginBtn: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Log in", for: .normal)
+        btn.setTitleColor(.twitterBlue, for: .normal)
+
+        btn.backgroundColor = .white
+        btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        btn.layer.cornerRadius = 5
+
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        btn.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        return btn
+    }()
+
+    // MARK: #©dontHaveAccBtn
+    internal var dontHaveAccBtn: UIButton = {
+        let dontHaveAcc: String = "Dont have account?"
+        let signUp: String = " Sign Up"
+        let btn: UIButton = u.attrButton(dontHaveAcc, signUp)
+
+        btn.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
+        return btn
+    }()
 
     /**©------------------------------------------------------------------------------©*/
 
@@ -76,7 +105,15 @@ class LoginViewController: UIViewController {
 
     // MARK: _#Selectors
     /**©-------------------------------------------©*/
+    @objc func handleShowSignUp() {
+        let registrationVC = RegistrationViewController()
+        navigationController?.pushViewController(registrationVC, animated: true)
+        printf("Show sign up...")
+    }
 
+    @objc func handleLogin() {
+        printf("Login handled...")
+    }
     /**©-------------------------------------------©*/
 
     // MARK: _©Helper-methods
@@ -100,22 +137,34 @@ class LoginViewController: UIViewController {
         // Hides the navigation controller
         navigationController?.navigationBar.isHidden = true
 
+        // MARK: _©twitterLogoImgView
+        /**©-----------------------©*/
         // Setting up our logo
         view.addSubview(twitterLogoImgView)
         // Constraining our logo
         twitterLogoImgView.centerX(inView: view, topAnchor: view.safeAreaLayoutGuide.topAnchor)
         // Setting the height & width of the logo
-        twitterLogoImgView.setDimensions(width: 150, height: 150)
+        twitterLogoImgView.setDimensions(width: 105, height: 105)
+        /**©-----------------------©*/
 
         // Creating a stack view with some helper functions
-        let verticalStack = UIStackView(arrangedSubviews: [ emailContainerView, pwdContainerView ])
+        let verticalStack = UIStackView(
+                arrangedSubviews: [ emailContainerView, pwdContainerView, loginBtn ])
         verticalStack.axis = .vertical
-        verticalStack.spacing = 8
+        verticalStack.spacing = 20
+        /* .distribution:--? This property determines how the
+            stack view lays out its arranged views along its axis. */
+        verticalStack.distribution = .fillEqually
 
         view.addSubview(verticalStack)
-        verticalStack.anchorWith(top: twitterLogoImgView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor)
-    }
+        verticalStack.anchorWith(top: twitterLogoImgView.bottomAnchor, left: view.leftAnchor,
+                                 right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
 
+        // MARK: #©Anchoring our--> dontHaveAccBtn to the bottom of the screen
+        view.addSubview(dontHaveAccBtn)
+        dontHaveAccBtn.anchorWith(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                                  right: view.rightAnchor, paddingLeft: 40, paddingRight: 40)
+    }
     /**©-------------------------------------------©*/
 }
 
