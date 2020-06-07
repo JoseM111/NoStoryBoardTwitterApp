@@ -5,8 +5,127 @@ class RegistrationViewController: UIViewController {
     // MARK: _©Utilities-typealias
     typealias u = Utilities
 
+    // MARK: -#©Image-picker property
+    internal let imgPicker = UIImagePickerController()
+
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
+
+    // MARK: -#©twitterLogoImgView
+    internal let plusPhotoBtnImg: UIButton = {
+        let plusPhotoBtn = UIButton(type: .system)
+        plusPhotoBtn.setImage(UIImage(named: "plus_photo"), for: .normal)
+
+        // Gives the button a white color
+        plusPhotoBtn.tintColor = .white
+        plusPhotoBtn.addTarget(self, action: #selector(handleProfilePhoto), for: .touchUpInside)
+
+        return plusPhotoBtn
+    }()
+
+    // MARK: _©Container-views-with-properties
+    /**©-----------------------©*/
+    internal lazy var emailContainerView: UIView = {
+        let uiView = UIView()
+        let uiImgView = UIImageView()
+        let mailImg: String = "ic_mail_outline_white_2x-1"
+
+        let containerView: UIView = u.inputContainerViewWith(
+                uiView: uiView, uiImgView: uiImgView, named: mailImg,
+                anchorPaddingLeft: 8, anchorPaddingBottom: 8,
+                dimensionWidth: 24, dimensionHeight: 24, txtField: emailTxtField)
+
+        return containerView
+    }()
+
+    internal lazy var pwdContainerView: UIView = {
+        let uiView = UIView()
+        let uiImgView = UIImageView()
+        let lockImg: String = "ic_lock_outline_white_2x"
+
+        let containerView: UIView = u.inputContainerViewWith(
+                uiView: uiView, uiImgView: uiImgView, named: lockImg,
+                anchorPaddingLeft: 8, anchorPaddingBottom: 8,
+                dimensionWidth: 24, dimensionHeight: 24, txtField: pwdTxtField)
+
+        return containerView
+    }()
+
+    internal lazy var fullNameContainerView: UIView = {
+        let uiView = UIView()
+        let uiImgView = UIImageView()
+        let mailImg: String = "ic_person_outline_white_2x"
+
+        let containerView: UIView = u.inputContainerViewWith(
+                uiView: uiView, uiImgView: uiImgView, named: mailImg,
+                anchorPaddingLeft: 8, anchorPaddingBottom: 8,
+                dimensionWidth: 24, dimensionHeight: 24, txtField: fullNameTxtField)
+
+        return containerView
+    }()
+
+    internal lazy var usernameContainerView: UIView = {
+        let uiView = UIView()
+        let uiImgView = UIImageView()
+        let lockImg: String = "ic_person_outline_white_2x"
+
+        let containerView: UIView = u.inputContainerViewWith(
+                uiView: uiView, uiImgView: uiImgView, named: lockImg,
+                anchorPaddingLeft: 8, anchorPaddingBottom: 8,
+                dimensionWidth: 24, dimensionHeight: 24, txtField: usernameTxtField)
+
+        return containerView
+    }()
+
+
+    /**© END ©Container views with properties ©*/
+
+    // MARK: _©Text-fields
+    /**©-----------------------©*/
+    internal let emailTxtField: UITextField = {
+        let email: String = "Email"
+        let tf: UITextField = u.textFieldWith(placeHolder: email, fontSize: 16)
+        return tf
+    }()
+
+    internal let pwdTxtField: UITextField = {
+        let pwd: String = "Password"
+        let tf: UITextField = u.textFieldWith(placeHolder: pwd, fontSize: 16)
+
+        /* Adding this line of code to secure the text entry. Meaning the
+           password text will look like --> ....... when typed
+           [NOTE] CMD + K pops up and dismisses the keyboard on the simulator */
+        tf.isSecureTextEntry = true
+        return tf
+    }()
+
+    internal let fullNameTxtField: UITextField = {
+        let fullName: String = "Full Name"
+        let tf: UITextField = u.textFieldWith(placeHolder: fullName, fontSize: 16)
+        return tf
+    }()
+
+    internal let usernameTxtField: UITextField = {
+        let username: String = "User Name"
+        let tf: UITextField = u.textFieldWith(placeHolder: username, fontSize: 16)
+        return tf
+    }()
+
+    // MARK: #©Login-button
+    internal let registrationBtn: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Sign Up", for: .normal)
+        btn.setTitleColor(.twitterBlue, for: .normal)
+
+        btn.backgroundColor = .white
+        btn.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        btn.layer.cornerRadius = 5
+
+        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        btn.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
+        return btn
+    }()
+
     // MARK: #©dontHaveAccBtn
     internal var alreadyHaveAccBtn: UIButton = {
         let haveAccount: String = "Already have account?"
@@ -29,6 +148,15 @@ class RegistrationViewController: UIViewController {
 
     // MARK: _#Selectors
     /**©-------------------------------------------©*/
+    @objc func handleRegistration() {
+        printf("Handling registration...")
+    }
+
+    @objc func handleProfilePhoto() {
+        present(imgPicker, animated: true, completion: nil)
+        printf("Add photo...")
+    }
+    
     @objc func handleShowLogin() {
         // This code shows the login controller
         /*-------------------------------------------------------
@@ -50,6 +178,42 @@ class RegistrationViewController: UIViewController {
     func configureUI() {
         view.backgroundColor = .twitterBlue
 
+        // MARK: _©Setting-imagePickers-->Delegate
+        /**©-----------------------©*/
+        imgPicker.delegate = self
+        imgPicker.allowsEditing = true
+        /**©-----------------------©*/
+
+        // MARK: _©twitterLogoImgView
+        /**©-----------------------©*/
+        // Setting up our logo
+        view.addSubview(plusPhotoBtnImg)
+        // Constraining our logo
+        plusPhotoBtnImg.centerX(inView: view, topAnchor: view.safeAreaLayoutGuide.topAnchor)
+        // Setting the height & width of the logo
+        plusPhotoBtnImg.setDimensions(width: 105, height: 105)
+        /**©-----------------------©*/
+
+        // MARK: _©Vertical-stack-view
+        // Creating a stack view with some helper functions
+        /**©-------------------------------------------©*/
+        let verticalStack = UIStackView(
+                arrangedSubviews: [
+                    emailContainerView, pwdContainerView, fullNameContainerView,
+                    usernameContainerView, registrationBtn ])
+
+        verticalStack.axis = .vertical
+        verticalStack.spacing = 20
+        /* .distribution:--? This property determines how the
+            stack view lays out its arranged views along its axis. */
+        verticalStack.distribution = .fillEqually
+
+        view.addSubview(verticalStack)
+        verticalStack.anchorWith(top: plusPhotoBtnImg.bottomAnchor, left: view.leftAnchor,
+                                 right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        /**©-------------------------------------------©*/
+
+
         // MARK: #©Anchoring our--> dontHaveAccBtn to the bottom of the screen
         view.addSubview(alreadyHaveAccBtn)
         alreadyHaveAccBtn.anchorWith(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,
@@ -57,4 +221,39 @@ class RegistrationViewController: UIViewController {
     }
 
     /**©-------------------------------------------©*/
+}
+
+// MARK: _©extension|RegistrationViewController|:[ UIImagePickerControllerDelegate, UINavigationControllerDelegate ]
+extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    // MARK: -#© imagePickerController
+    /* Tells the delegate that the user picked a still image or movie.
+       and allows the user to use the selected media. */
+    public func imagePickerController(_ picker: UIImagePickerController,
+                                      didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+
+        // MARK: _©Adjusting-Image-Look
+        // Adding a corner radius to the image we
+        // select To render it nice and rounded
+        /**©-----------------------©*/
+        plusPhotoBtnImg.layer.cornerRadius = 105 / 2
+        plusPhotoBtnImg.layer.masksToBounds = true
+        // Scales the image to fit the frame
+        plusPhotoBtnImg.imageView?.contentMode = .scaleAspectFill
+        // A Boolean value that determines whether subviews are confined to the bounds of the view.
+        plusPhotoBtnImg.imageView?.clipsToBounds = true
+        // Adding our border-color: NOTE you must add the .cgColor for it to work
+        plusPhotoBtnImg.layer.borderColor = UIColor.white.cgColor
+        // Adding the border width
+        plusPhotoBtnImg.layer.borderWidth = 3
+        /**©-----------------------©*/
+
+        // info[.editedImage]:--? is a dictionary[ info/key : .editedImage/value ]
+        /* .withRenderingMode:--? Returns a new version of the image configured with the specified rendering mode.
+           .alwaysOriginal:--? Always draw the original image, without treating it as a template. */
+        guard let profileImg: UIImage = info[.editedImage] as? UIImage else { return }
+        self.plusPhotoBtnImg.setImage(profileImg.withRenderingMode(.alwaysOriginal), for: .normal)
+        // Have to dismiss the image picker or when you choose in the simulator nothing happens
+        dismiss(animated: true, completion: nil)
+    }
 }

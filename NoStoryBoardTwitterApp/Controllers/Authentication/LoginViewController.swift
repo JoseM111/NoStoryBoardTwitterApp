@@ -7,6 +7,8 @@ class LoginViewController: UIViewController {
 
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
+
+    // MARK: -#©twitterLogoImgView
     internal let twitterLogoImgView: UIImageView = {
         let twitterImg = UIImageView()
         twitterImg.contentMode = .scaleAspectFit
@@ -147,7 +149,9 @@ class LoginViewController: UIViewController {
         twitterLogoImgView.setDimensions(width: 105, height: 105)
         /**©-----------------------©*/
 
+        // MARK: _©Vertical-stack-view
         // Creating a stack view with some helper functions
+        /**©-------------------------------------------©*/
         let verticalStack = UIStackView(
                 arrangedSubviews: [ emailContainerView, pwdContainerView, loginBtn ])
         verticalStack.axis = .vertical
@@ -159,6 +163,7 @@ class LoginViewController: UIViewController {
         view.addSubview(verticalStack)
         verticalStack.anchorWith(top: twitterLogoImgView.bottomAnchor, left: view.leftAnchor,
                                  right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
+        /**©-------------------------------------------©*/
 
         // MARK: #©Anchoring our--> dontHaveAccBtn to the bottom of the screen
         view.addSubview(dontHaveAccBtn)
