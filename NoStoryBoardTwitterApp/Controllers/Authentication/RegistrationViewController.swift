@@ -221,7 +221,7 @@ class RegistrationViewController: UIViewController {
     }
 
     /**©-------------------------------------------©*/
-}
+}// END OF CLASS
 
 // MARK: _©extension|RegistrationViewController|:[ UIImagePickerControllerDelegate, UINavigationControllerDelegate ]
 extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

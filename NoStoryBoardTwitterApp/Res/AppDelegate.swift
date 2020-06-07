@@ -1,12 +1,5 @@
-//
-//  AppDelegate.swift
-//  NoStoryBoardTwitterApp
-//
-//  Created by Jose Martinez on 6/5/20.
-//  Copyright © 2020 Jose Martinez. All rights reserved.
-//
-
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +8,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        // Configures firebase to work with our project
+        FirebaseApp.configure()
         return true
     }
 
