@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		088EF4CAC78AA245421CF7C3 /* Pods_NoStoryBoardTwitterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF50B0D2BE726394BA12C89 /* Pods_NoStoryBoardTwitterApp.framework */; };
 		9EEA71556CC6137EF1338736 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA789AFAF607DAEEE540F6 /* Extensions.swift */; };
+		9EEA72AE745B3E7ED4CFD80A /* ConstantStrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7B39FAC12054AF339641 /* ConstantStrs.swift */; };
+		9EEA736541C5D9EEEDE73B27 /* DictKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA762EA5012E56A78DD328 /* DictKeys.swift */; };
 		9EEA74E6188EB2FDFA7311F1 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA731B53AD919FC90BD62A /* MainTabController.swift */; };
 		9EEA77FA026CDC26212A8681 /* ConvoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7BA11585FEFC93E4DED5 /* ConvoViewController.swift */; };
 		9EEA780654506AE9BADCB3D2 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7811859BB2917ED51146 /* NotificationViewController.swift */; };
@@ -32,10 +34,12 @@
 		7EF50B0D2BE726394BA12C89 /* Pods_NoStoryBoardTwitterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoStoryBoardTwitterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EEA731B53AD919FC90BD62A /* MainTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		9EEA762E949774048CD62539 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		9EEA762EA5012E56A78DD328 /* DictKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictKeys.swift; sourceTree = "<group>"; };
 		9EEA77E8B1947435FED772B8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		9EEA7811859BB2917ED51146 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		9EEA789AFAF607DAEEE540F6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9EEA7962157E5D81AA2224E6 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		9EEA7B39FAC12054AF339641 /* ConstantStrs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantStrs.swift; sourceTree = "<group>"; };
 		9EEA7BA11585FEFC93E4DED5 /* ConvoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvoViewController.swift; sourceTree = "<group>"; };
 		9EEA7BBA700844B4732225CF /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		9EEA7C853017A97191BC5C46 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 		ABB981FA248AE8DC00AF2C88 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9EEA7B39FAC12054AF339641 /* ConstantStrs.swift */,
+				9EEA762EA5012E56A78DD328 /* DictKeys.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -338,6 +344,8 @@
 				9EEA7BD89A2718B61CB0E9CD /* LoginViewController.swift in Sources */,
 				9EEA7923AEDFD4D9D1FD7AB8 /* RegistrationViewController.swift in Sources */,
 				9EEA7B0313C84E117BFB9A8C /* Utilities.swift in Sources */,
+				9EEA72AE745B3E7ED4CFD80A /* ConstantStrs.swift in Sources */,
+				9EEA736541C5D9EEEDE73B27 /* DictKeys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

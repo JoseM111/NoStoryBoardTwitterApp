@@ -1,12 +1,15 @@
 import UIKit
+import Firebase
 
 class RegistrationViewController: UIViewController {
 
     // MARK: _©Utilities-typealias
     typealias u = Utilities
+    typealias k = DictKeys
 
     // MARK: -#©Image-picker property
     internal let imgPicker = UIImagePickerController()
+    internal var profileImg: UIImage?
 
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
@@ -149,14 +152,53 @@ class RegistrationViewController: UIViewController {
     // MARK: _#Selectors
     /**©-------------------------------------------©*/
     @objc func handleRegistration() {
-        printf("Handling registration...")
+        guard let profileImg: UIImage = profileImg else {
+            return printf("DEBUG: Please select a profile image...")
+        }
+        guard let email: String = emailTxtField.text,
+              let pwd: String = pwdTxtField.text,
+              let fullname: String = fullNameTxtField.text,
+              let username: String = usernameTxtField.text else { return }
+
+        // MARK: _©Firebase-createUser
+        /**©-----------------------©*/
+        AUTH.createUser(withEmail: email, password: pwd) { (result, error) in
+            // - Handling error
+            if let error = error {
+                return printf("DEBUG: Error is \(error.localizedDescription)")
+            }
+
+            // - User ID
+            guard let uid = result?.user.uid else { return }
+
+            // Data Dictionary
+            let dictData = [ k.UIDKey : uid, k.EmailKey : email, k.PWDKey : pwd,
+                             k.UserKey : username, k.FullNameKey : fullname ]
+
+            // Updating
+            DATABASE_REF_CHILD.child(uid).updateChildValues(dictData) { (error, _) in
+                if let error = error {
+                    return printf("[ERROR] Could not add user to firebase..\n\(error.localizedDescription)")
+                }
+
+                printf("DEBUG: Successfully registered user...")
+                printf("""
+                       DEBUG: User ID: \(uid)
+                       DEBUG: Email: \(email)
+                       DEBUG: Password: \(pwd)
+                       DEBUG: Full Name: \(fullname)
+                       DEBUG: User Name: \(username)
+                       """)
+            }
+        }
+        /**©-----------------------©*/
     }
 
     @objc func handleProfilePhoto() {
         present(imgPicker, animated: true, completion: nil)
         printf("Add photo...")
     }
-    
+
     @objc func handleShowLogin() {
         // This code shows the login controller
         /*-------------------------------------------------------
@@ -252,6 +294,8 @@ extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigat
         /* .withRenderingMode:--? Returns a new version of the image configured with the specified rendering mode.
            .alwaysOriginal:--? Always draw the original image, without treating it as a template. */
         guard let profileImg: UIImage = info[.editedImage] as? UIImage else { return }
+        self.profileImg = profileImg
+
         self.plusPhotoBtnImg.setImage(profileImg.withRenderingMode(.alwaysOriginal), for: .normal)
         // Have to dismiss the image picker or when you choose in the simulator nothing happens
         dismiss(animated: true, completion: nil)
