@@ -156,29 +156,32 @@ class RegistrationViewController: UIViewController {
         guard let profileImg: UIImage = profileImg else {
             return printf("DEBUG: Please select a profile image...")
         }
+
+        printf("Beginning of handle Registration...")
         guard let email: String = emailTxtField.text,
               let pwd: String = pwdTxtField.text,
               let fullname: String = fullNameTxtField.text,
               let username: String = usernameTxtField.text else { return }
+        guard let imgData = profileImg.jpegData(compressionQuality: 0.3) else { return }
 
+        printf("Right after assigning all field variables...")
         // Once we obtain the image, we want to compress it. Because the
         // image will be to large & will take longer to upload to firebase.
-        guard let imgData = profileImg.jpegData(compressionQuality: 0.3) else { return }
         let filenameID = NSUUID().uuidString
         let storageRef = STORAGE_PROFILE_IMAGES.child(filenameID)
 
+        printf("Made it to--> putData()...")
         // MARK: _©Uploading the image data to firebase
-        storageRef.putData(_: imgData, metadata: nil) { (meta , error) in
-            // - Handling error
-            if let error = error {
-                return printf("[ERROR] No data found..\n\(error.localizedDescription)")
-            }
+        storageRef.putData(_: imgData, metadata: nil) { (_ , _) in
 
+            // MARK: _©storageRef.downloadURL
+            /**©-----------------------©*/
             storageRef.downloadURL { url, error in
                 guard let profileImgURL = url?.absoluteString else { return }
 
                 // MARK: _©Firebase-createUser
                 /**©-----------------------©*/
+                printf("Got to create user--> createUser()...")
                 AUTH.createUser(withEmail: email, password: pwd) { (result, error) in
                     // - Handling error
                     if let error = error {
@@ -194,7 +197,8 @@ class RegistrationViewController: UIViewController {
                                      k.FullNameKey : fullname,
                                      k.ImgUrlKey : profileImgURL ]
 
-                    // Updating
+                    // Updating database
+                    printf("Reached database call--> .updateChildValues(dictData)...")
                     DATABASE_REF_CHILD.child(uid).updateChildValues(dictData) { (error, _) in
                         if let error = error {
                             return printf("[ERROR] Could not add user to firebase..\n\(error.localizedDescription)")
@@ -213,12 +217,14 @@ class RegistrationViewController: UIViewController {
                 }
                 /**©-----------------------©*/
             }
+            /**©-----------------------©*/
+
         }
     }/// END OF FUNCTION
 
     @objc func handleProfilePhoto() {
         present(imgPicker, animated: true, completion: nil)
-        printf("Add photo...")
+        printf("Adding a photo...")
     }
 
     @objc func handleShowLogin() {
