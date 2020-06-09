@@ -152,6 +152,7 @@ class RegistrationViewController: UIViewController {
     // MARK: _#Selectors
     /**©-------------------------------------------©*/
     @objc func handleRegistration() {
+
         guard let profileImg: UIImage = profileImg else {
             return printf("DEBUG: Please select a profile image...")
         }
@@ -160,39 +161,60 @@ class RegistrationViewController: UIViewController {
               let fullname: String = fullNameTxtField.text,
               let username: String = usernameTxtField.text else { return }
 
-        // MARK: _©Firebase-createUser
-        /**©-----------------------©*/
-        AUTH.createUser(withEmail: email, password: pwd) { (result, error) in
+        // Once we obtain the image, we want to compress it. Because the
+        // image will be to large & will take longer to upload to firebase.
+        guard let imgData = profileImg.jpegData(compressionQuality: 0.3) else { return }
+        let filenameID = NSUUID().uuidString
+        let storageRef = STORAGE_PROFILE_IMAGES.child(filenameID)
+
+        // MARK: _©Uploading the image data to firebase
+        storageRef.putData(_: imgData, metadata: nil) { (meta , error) in
             // - Handling error
             if let error = error {
-                return printf("DEBUG: Error is \(error.localizedDescription)")
+                return printf("[ERROR] No data found..\n\(error.localizedDescription)")
             }
 
-            // - User ID
-            guard let uid = result?.user.uid else { return }
+            storageRef.downloadURL { url, error in
+                guard let profileImgURL = url?.absoluteString else { return }
 
-            // Data Dictionary
-            let dictData = [ k.UIDKey : uid, k.EmailKey : email, k.PWDKey : pwd,
-                             k.UserKey : username, k.FullNameKey : fullname ]
+                // MARK: _©Firebase-createUser
+                /**©-----------------------©*/
+                AUTH.createUser(withEmail: email, password: pwd) { (result, error) in
+                    // - Handling error
+                    if let error = error {
+                        return printf("DEBUG: Error is \(error.localizedDescription)")
+                    }
 
-            // Updating
-            DATABASE_REF_CHILD.child(uid).updateChildValues(dictData) { (error, _) in
-                if let error = error {
-                    return printf("[ERROR] Could not add user to firebase..\n\(error.localizedDescription)")
+                    // - User ID
+                    guard let uid = result?.user.uid else { return }
+
+                    // Data Dictionary
+                    let dictData = [ k.UIDKey : uid, k.EmailKey : email,
+                                     k.PWDKey : pwd, k.UserKey : username,
+                                     k.FullNameKey : fullname,
+                                     k.ImgUrlKey : profileImgURL ]
+
+                    // Updating
+                    DATABASE_REF_CHILD.child(uid).updateChildValues(dictData) { (error, _) in
+                        if let error = error {
+                            return printf("[ERROR] Could not add user to firebase..\n\(error.localizedDescription)")
+                        }
+
+                        printf("DEBUG: Successfully registered user...")
+                        printf("""
+                               DEBUG: User ID: \(uid)
+                               DEBUG: Email: \(email)
+                               DEBUG: Password: \(pwd)
+                               DEBUG: Full Name: \(fullname)
+                               DEBUG: User Name: \(username)
+                               DEBUG: User Name: \(profileImgURL)
+                               """)
+                    }
                 }
-
-                printf("DEBUG: Successfully registered user...")
-                printf("""
-                       DEBUG: User ID: \(uid)
-                       DEBUG: Email: \(email)
-                       DEBUG: Password: \(pwd)
-                       DEBUG: Full Name: \(fullname)
-                       DEBUG: User Name: \(username)
-                       """)
+                /**©-----------------------©*/
             }
         }
-        /**©-----------------------©*/
-    }
+    }/// END OF FUNCTION
 
     @objc func handleProfilePhoto() {
         present(imgPicker, animated: true, completion: nil)

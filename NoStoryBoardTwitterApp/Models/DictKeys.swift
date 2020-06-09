@@ -7,4 +7,5 @@ struct DictKeys {
     static let PWDKey: String = "Password"
     static let UserKey: String = "User Name"
     static let FullNameKey: String = "Full Name"
+    static let ImgUrlKey: String = "profileImgUrl"
 }
