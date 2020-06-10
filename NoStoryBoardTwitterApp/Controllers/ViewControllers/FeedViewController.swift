@@ -36,6 +36,9 @@ class FeedViewController: UIViewController {
         let twitterImgView = UIImageView(image: UIImage(named: "twitter_logo_blue"))
         // How the image is going to get fit inside of the image view
         twitterImgView.contentMode = .scaleAspectFit
+        // Setting the dimensions so our twitter images
+        // does not move when adding the user image
+        twitterImgView.setDimensions(width: 44, height: 44)
         /* .titleView:--? A custom view displayed in the center of
             the navigation bar when the receiver is the top item. */
         navigationItem.titleView = twitterImgView
