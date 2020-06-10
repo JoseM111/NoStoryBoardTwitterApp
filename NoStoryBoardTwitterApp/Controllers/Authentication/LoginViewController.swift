@@ -114,7 +114,27 @@ class LoginViewController: UIViewController {
     }
 
     @objc func handleLogin() {
-        printf("Login handled...")
+        guard let email: String = emailTxtField.text,
+              let pwd: String = pwdTxtField.text else { return }
+
+        AuthService.shared.loginUserWith(email: email, pwd: pwd) {(_, error) in
+            if let error = error {
+                return printf("Error logging in...\n\(error.localizedDescription)")
+            }
+
+            // Accessing our main tab controller:
+            // We have to create our window because `keyWindow` is deprecated since ios 13 came out
+            guard let window: UIWindow = UIApplication.shared.windows
+                    .first(where: { $0.isKeyWindow }) else { return }
+
+            guard let mainTab: MainTabController = window.rootViewController as? MainTabController else { return }
+            // Now when you log in successfully, you should be forwarded to your main tab controller
+            mainTab.authUserAndConfigUI()
+
+            self.dismiss(animated: true, completion: nil)
+            printf("DEBUG: Successful login...")
+        }
+
     }
     /**©-------------------------------------------©*/
 

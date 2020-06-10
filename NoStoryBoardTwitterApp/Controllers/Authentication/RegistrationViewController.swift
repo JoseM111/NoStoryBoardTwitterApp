@@ -5,7 +5,6 @@ class RegistrationViewController: UIViewController {
 
     // MARK: _©Utilities-typealias
     typealias u = Utilities
-    typealias k = DictKeys
 
     // MARK: -#©Image-picker property
     internal let imgPicker = UIImagePickerController()
@@ -162,63 +161,28 @@ class RegistrationViewController: UIViewController {
               let pwd: String = pwdTxtField.text,
               let fullname: String = fullNameTxtField.text,
               let username: String = usernameTxtField.text else { return }
-        guard let imgData = profileImg.jpegData(compressionQuality: 0.3) else { return }
 
-        printf("Right after assigning all field variables...")
-        // Once we obtain the image, we want to compress it. Because the
-        // image will be to large & will take longer to upload to firebase.
-        let filenameID = NSUUID().uuidString
-        let storageRef = STORAGE_PROFILE_IMAGES.child(filenameID)
+        let credentials = AuthCredentials(email: email, pwd: pwd,
+                                          username: username,
+                                          fullname: fullname,
+                                          profileImg: profileImg)
 
-        printf("Made it to--> putData()...")
-        // MARK: _©Uploading the image data to firebase
-        storageRef.putData(_: imgData, metadata: nil) { (_ , _) in
-
-            // MARK: _©storageRef.downloadURL
-            /**©-----------------------©*/
-            storageRef.downloadURL { url, error in
-                guard let profileImgURL = url?.absoluteString else { return }
-
-                // MARK: _©Firebase-createUser
-                /**©-----------------------©*/
-                printf("Got to create user--> createUser()...")
-                AUTH.createUser(withEmail: email, password: pwd) { (result, error) in
-                    // - Handling error
-                    if let error = error {
-                        return printf("DEBUG: Error is \(error.localizedDescription)")
-                    }
-
-                    // - User ID
-                    guard let uid = result?.user.uid else { return }
-
-                    // Data Dictionary
-                    let dictData = [ k.UIDKey : uid, k.EmailKey : email,
-                                     k.PWDKey : pwd, k.UserKey : username,
-                                     k.FullNameKey : fullname,
-                                     k.ImgUrlKey : profileImgURL ]
-
-                    // Updating database
-                    printf("Reached database call--> .updateChildValues(dictData)...")
-                    DATABASE_REF_CHILD.child(uid).updateChildValues(dictData) { (error, _) in
-                        if let error = error {
-                            return printf("[ERROR] Could not add user to firebase..\n\(error.localizedDescription)")
-                        }
-
-                        printf("DEBUG: Successfully registered user...")
-                        printf("""
-                               DEBUG: User ID: \(uid)
-                               DEBUG: Email: \(email)
-                               DEBUG: Password: \(pwd)
-                               DEBUG: Full Name: \(fullname)
-                               DEBUG: User Name: \(username)
-                               DEBUG: User Name: \(profileImgURL)
-                               """)
-                    }
-                }
-                /**©-----------------------©*/
+        AuthService.shared.registerUser(credentials: credentials) { error, _ in
+            if let error = error {
+                return printf("[ERROR] Invalid credentials..\n\(error.localizedDescription)")
             }
-            /**©-----------------------©*/
 
+            // Accessing our main tab controller:
+            // We have to create our window because `keyWindow` is deprecated since ios 13 came out
+            guard let window: UIWindow = UIApplication.shared.windows
+                    .first(where: { $0.isKeyWindow }) else { return }
+
+            guard let mainTab: MainTabController = window.rootViewController as? MainTabController else { return }
+            // Now when you log in successfully, you should be forwarded to your main tab controller
+            mainTab.authUserAndConfigUI()
+
+            self.dismiss(animated: true, completion: nil)
+            printf("DEBUG: Successfully registered user...")
         }
     }/// END OF FUNCTION
 

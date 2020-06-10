@@ -2,6 +2,11 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
+    // MARK: _©Computed-property
+    var user: User? {
+        didSet { printf("DEBUG: Did set user in feed controller...") }
+    }
+
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
 
@@ -28,6 +33,13 @@ class FeedViewController: UIViewController {
         /* .titleView:--? A custom view displayed in the center of
             the navigation bar when the receiver is the top item. */
         navigationItem.titleView = twitterImgView
+
+        let profileImgView = UIImageView()
+        profileImgView.backgroundColor = .twitterBlue
+        profileImgView.setDimensions(width: 32, height: 32)
+        profileImgView.layer.cornerRadius = 32 / 2
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImgView)
     }
 
     /**©-------------------------------------------©*/
