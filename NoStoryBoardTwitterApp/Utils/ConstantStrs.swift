@@ -1,12 +1,16 @@
 import UIKit
 import Firebase
 
-// Uploads image to firebase
+// UPLOADS IMAGE TO FIREBASE
 let STORAGE_REF: StorageReference = Storage.storage().reference()
 let PROFILE_IMG: String = "profile_images"
 let STORAGE_PROFILE_IMAGES: StorageReference = STORAGE_REF.child(PROFILE_IMG)
 
-// Create user to firebase
+// CREATE USER TO FIREBASE
 let AUTH: Auth = Auth.auth()
 let USERS: String = "users"
 let DATABASE_REF_CHILD: DatabaseReference = Database.database().reference().child(USERS)
+
+// TWEET CONSTANTS
+let TWEET: String = "tweet"
+let REF_TWEET: DatabaseReference = DATABASE_REF_CHILD.child(TWEET)

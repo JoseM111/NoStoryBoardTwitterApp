@@ -1,7 +1,7 @@
 import UIKit
 
 class UploadTweetViewController: UIViewController {
-
+    // MARK: _#Helper property
     internal let user: User
 
     // MARK: _©Properties
@@ -72,11 +72,27 @@ class UploadTweetViewController: UIViewController {
     // MARK: _#Selectors
     /**©-------------------------------------------©*/
     @objc func handleUploadTweet() {
-        printf("""
-               DEBUG: Button clicked!..-->
-               Uploading tweet...
-               """)
-    }
+
+        // Getting our caption from the user status inputted into our caption text
+        guard let captionToTweet = captionTxtView.text else { return }
+
+        TweetService.shared.uploadTweet(caption: captionToTweet) { error, ref in
+            if let error = error {
+                return printf("""
+                              [ERROR] Could not upload tweet...
+                              \(error.localizedDescription)
+                              """)
+            }
+
+            printf("""
+                   DEBUG: Button clicked!..-->
+                   Uploaded tweet to database...
+                   """)
+
+            // Once the tweet is posted we will just dismiss the controller
+            self.dismiss(animated: true, completion: nil)
+        }
+    }// END OF FUNC
 
     @objc func handleCancel() {
         // Going to dismiss the presented view when clicked

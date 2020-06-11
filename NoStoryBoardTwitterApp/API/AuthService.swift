@@ -7,9 +7,9 @@ struct AuthService {
 
     // MARK: _©Utilities-typealias
     typealias k = DictKeys
-    typealias ErrorDbRef = (Error?, DatabaseReference) -> Void
+    typealias ErrorOrDBRef = (Error?, DatabaseReference) -> Void
 
-    // MARK: _©Methods
+    // MARK: _©API-methods
     /**©------------------------------------------------------------------------------©*/
 
     // MARK: #©loginUser
@@ -22,7 +22,7 @@ struct AuthService {
     }
 
     // MARK: #©registerUser
-    func registerUser(credentials c: AuthCredentials, completion: @escaping ErrorDbRef) {
+    func registerUser(credentials c: AuthCredentials, completion: @escaping ErrorOrDBRef) {
         let email: String = c.email
         let pwd: String = c.pwd
         let username: String = c.username
@@ -41,12 +41,10 @@ struct AuthService {
         storageRef.putData(_: imgData, metadata: nil) { (_ , _) in
 
             // MARK: _©storageRef.downloadURL
-            /**©-----------------------©*/
             storageRef.downloadURL { url, error in
                 guard let profileImgURL = url?.absoluteString else { return }
 
                 // MARK: _©Firebase-createUser
-                /**©-----------------------©*/
                 printf("Got to create user--> createUser()...")
                 AUTH.createUser(withEmail: email, password: pwd) { (result, error) in
                     // - Handling error
@@ -76,12 +74,8 @@ struct AuthService {
                            DEBUG: User Name: \(profileImgURL)
                            """)
                 }
-                /**©-----------------------©*/
             }
-            /**©-----------------------©*/
         }
     }
     /**©------------------------------------------------------------------------------©*/
-
-
 }// END OF CLASS

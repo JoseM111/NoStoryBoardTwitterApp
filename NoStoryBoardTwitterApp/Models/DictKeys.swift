@@ -14,5 +14,6 @@ struct DictKeys {
     static let TimestampKey: String = "timestamp"
     static let LikesKey: String = "likes"
     static let RetweetsKey: String = "retweets"
+    static let CaptionKey: String = "caption"
 
 }

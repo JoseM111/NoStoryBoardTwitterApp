@@ -7,6 +7,8 @@ struct UserService {
     // MARK: #©Type-alias DictKeys
     typealias k = DictKeys
 
+    // MARK: _©API-Methods
+    /**©------------------------------------------------------------------------------©*/
     func fetchUser(completion: @escaping (User) -> Void) {
 
         guard let uid = AUTH.currentUser?.uid else { return }
@@ -20,4 +22,5 @@ struct UserService {
             completion(user)
         }
     }
-}
+    /**©------------------------------------------------------------------------------©*/
+}// END OF CLASS
