@@ -107,7 +107,15 @@ class MainTabController: UITabBarController {
     // MARK: _#Selectors
     /**©-------------------------------------------©*/
     @objc func actionBtnTapped() {
-        printf(123)
+        let tweetNav = UINavigationController(rootViewController: UploadTweetViewController())
+        // Makes the UploadTweetViewController full screen when the button is clicked
+        tweetNav.modalPresentationStyle = .fullScreen
+        present(tweetNav, animated: true, completion: nil)
+
+        printf("""
+               DEBUG: Button clicked!..--> 🦅
+               Forwarding to UploadTweetViewController...
+               """)
     }
     /**©-------------------------------------------©*/
 
