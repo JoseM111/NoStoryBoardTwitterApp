@@ -51,8 +51,8 @@ class FeedViewController: UIViewController {
         guard let user: User = user else { return }
 
         let profileImgView = UIImageView()
-        profileImgView.setDimensions(width: 32, height: 32)
-        profileImgView.layer.cornerRadius = 32 / 2
+        profileImgView.setDimensions(width: 42, height: 42)
+        profileImgView.layer.cornerRadius = 42 / 2
 
         /* When the value of this property is true, Core Animation creates
          an implicit clipping mask that matches the bounds of the layer and
