@@ -87,7 +87,7 @@ class TweetCell: UICollectionViewCell {
         addSubview(profileImgView)
         // Constraints
         profileImgView.anchorWith(top: topAnchor, left: leftAnchor,
-                                  paddingTop: 12, paddingLeft: 8)
+                                  paddingTop: 8, paddingLeft: 8)
 
         // MARK: _©Adding infoLbl, captionLbl to a vertical stack
         /**©-------------------------------------------©*/

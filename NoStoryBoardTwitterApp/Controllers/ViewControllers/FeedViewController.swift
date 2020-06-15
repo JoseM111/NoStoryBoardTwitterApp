@@ -3,6 +3,8 @@ import SDWebImage
 
 class FeedViewController: UICollectionViewController {
 
+    internal var listOfTweets: [Tweet] = []
+
     // MARK: _©Computed-property
     var user: User? {
         didSet {
@@ -32,7 +34,9 @@ class FeedViewController: UICollectionViewController {
     func fetchTweet() {
 
         TweetService.shared.fetchTweets { (tweets: [Tweet]) in
-            printf("DEBUG:\nTweets #\(tweets.count): \(tweets)")
+            self.listOfTweets = tweets
+
+            printf("DEBUG:\nTweets #\(tweets.count)")
         }
     }
 
@@ -85,11 +89,11 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Will return the number in sections(numberOfItemsInSection)
         // in the frames width and the height specified
-        CGSize(width: view.frame.width, height: 100)
+        CGSize(width: view.frame.width, height: 120)
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5 // Will render five cells
+        listOfTweets.count // Will render five cells
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
