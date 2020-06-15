@@ -1,7 +1,7 @@
 import UIKit
 import SDWebImage
 
-class FeedViewController: UIViewController {
+class FeedViewController: UICollectionViewController {
 
     // MARK: _©Computed-property
     var user: User? {
@@ -24,13 +24,26 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
+        fetchTweet()
     }
     /**©-----------------------©*/
+
+    // MARK: _#API
+    func fetchTweet() {
+
+        TweetService.shared.fetchTweets { (tweets: [Tweet]) in
+            printf("DEBUG:\nTweets #\(tweets.count): \(tweets)")
+        }
+    }
 
     // MARK: _©Helper-methods
     /**©-------------------------------------------©*/
     func configureUI() {
         view.backgroundColor = .white
+
+        // Collection view
+        collectionView.register(TweetCell.self, forCellWithReuseIdentifier: REUSE_IDENTIFIER)
+        collectionView.backgroundColor = .white
 
         // Setup our twitter logo at the top of the nav bar
         let twitterImgView = UIImageView(image: UIImage(named: "twitter_logo_blue"))
@@ -64,4 +77,26 @@ class FeedViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImgView)
     }
     /**©-------------------------------------------©*/
+}
+
+extension FeedViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Will return the number in sections(numberOfItemsInSection)
+        // in the frames width and the height specified
+        CGSize(width: view.frame.width, height: 100)
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        5 // Will render five cells
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell: TweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDENTIFIER, for: indexPath)
+        as? TweetCell else { return TweetCell() }
+
+        return cell
+    }
 }

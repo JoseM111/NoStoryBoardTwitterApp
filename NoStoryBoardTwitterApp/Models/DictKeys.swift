@@ -11,6 +11,7 @@ struct DictKeys {
 
     // MARK: #©CREATE-TWEET_STRING-KEYS
     static let TweetUIDKey: String = "uid"
+    static let TUIDKey: String = "uid"
     static let TimestampKey: String = "timestamp"
     static let LikesKey: String = "likes"
     static let RetweetsKey: String = "retweets"
