@@ -167,7 +167,7 @@ class TweetCell: UICollectionViewCell {
 
         printf("""
                DEBUG: 
-               Tweet User Name: \(tweetViewModel.userInfoText)
+               Tweet User Name: @\(tweetViewModel.user.username)
                Caption tweeted by user: \(tweet.caption)
                """)
     }

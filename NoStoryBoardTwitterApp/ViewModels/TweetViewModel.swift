@@ -28,8 +28,11 @@ struct TweetViewModel {
         title.append(NSAttributedString(string: " @\(user.username)",
                                         attributes: [.font: UIFont.boldSystemFont(ofSize: 14),
                                                      .foregroundColor: UIColor.lightGray]))
+        // Adds the `timestamp` in the cell of the tweet
+        title.append(NSAttributedString(string: " ∙ \(timeStamp)",
+                                        attributes: [.font: UIFont.boldSystemFont(ofSize: 14),
+                                                     .foregroundColor: UIColor.lightGray]))
 
-        printf("Date of tweet: \(timeStamp)")
 
         return title
     }
