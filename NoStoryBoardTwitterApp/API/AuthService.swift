@@ -56,7 +56,7 @@ struct AuthService {
                     guard let uid = result?.user.uid else { return }
 
                     // Data Dictionary
-                    let dictData: [String: Any] = [ k.UIDKey : uid, k.EmailKey : email,
+                    let dictData: [String: Any] = [ k.UserIDKey : uid, k.EmailKey : email,
                                                     k.PWDKey : pwd, k.UserKey : username,
                                                     k.FullNameKey : fullname,
                                                     k.ImgUrlKey : profileImgURL ]

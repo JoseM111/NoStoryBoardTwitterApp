@@ -9,9 +9,7 @@ struct UserService {
 
     // MARK: _©API-Methods
     /**©------------------------------------------------------------------------------©*/
-    func fetchUser(completion: @escaping (User) -> Void) {
-
-        guard let uid = AUTH.currentUser?.uid else { return }
+    func fetchUser(uid: String, completion: @escaping (User) -> Void) {
 
         DATABASE_REF_CHILD.child(uid).observeSingleEvent(of: .value) { (snapshot) in
             // Our User dictionary

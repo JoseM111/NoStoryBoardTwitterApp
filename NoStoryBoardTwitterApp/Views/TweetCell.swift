@@ -5,6 +5,11 @@ class TweetCell: UICollectionViewCell {
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
     // -->profileImgView
+    var tweet: Tweet? {
+        didSet { configureTweet() }
+    }
+
+    // -->profileImgView
     internal let profileImgView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -151,7 +156,21 @@ class TweetCell: UICollectionViewCell {
 
     // MARK: _#Helpers
     /**©-------------------------------------------©*/
+    func configureTweet() {
+        guard let tweet: Tweet = tweet else { return }
+        let tweetViewModel = TweetViewModel(tweet: tweet)
+        // Will show what was tweeted
+        captionLbl.text = tweet.caption
 
+        profileImgView.sd_setImage(with: tweetViewModel.profileImgURL)
+        infoLbl.attributedText = tweetViewModel.userInfoText
+
+        printf("""
+               DEBUG: 
+               Tweet User Name: \(tweetViewModel.userInfoText)
+               Caption tweeted by user: \(tweet.caption)
+               """)
+    }
     /**©-------------------------------------------©*/
 
 

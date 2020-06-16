@@ -29,6 +29,7 @@ class UploadTweetViewController: UIViewController {
     // -->profileImgView
     internal let profileImgView: UIImageView = {
         let iv = UIImageView()
+        /* ⭐⭐⭐ CHANGE IMAGE FILL HERE ⭐⭐️⭐ */
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         // How big the image view will be

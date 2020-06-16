@@ -3,7 +3,18 @@ import SDWebImage
 
 class FeedViewController: UICollectionViewController {
 
-    internal var listOfTweets: [Tweet] = []
+    // MARK: _©Properties
+    /**©------------------------------------------------------------------------------©*/
+    // MARK: #©Data-source
+    internal var tweets: [Tweet] = [] {
+        /* As soon as this property is set we want it to
+           reload its data, to render whats in the database.
+           We Have to run this for `numberOfItemsInSection`
+           to work in the `extension` of `FeedViewController`
+           Will render sections depending on the number of
+           tweets in the firebase database. */
+        didSet { collectionView.reloadData() }
+    }
 
     // MARK: _©Computed-property
     var user: User? {
@@ -11,12 +22,9 @@ class FeedViewController: UICollectionViewController {
             // Must be set and called before the configureUI() method
             // because there isn't a user, until a user is set!
             configureLeftBarBtn()
-            printf("DEBUG: Did set user in feed controller...") 
+            printf("DEBUG: Did set user in feed controller...")
         }
     }
-
-    // MARK: _©Properties
-    /**©------------------------------------------------------------------------------©*/
 
     /**©------------------------------------------------------------------------------©*/
 
@@ -34,7 +42,7 @@ class FeedViewController: UICollectionViewController {
     func fetchTweet() {
 
         TweetService.shared.fetchTweets { (tweets: [Tweet]) in
-            self.listOfTweets = tweets
+            self.tweets = tweets
 
             printf("DEBUG:\nTweets #\(tweets.count)")
         }
@@ -85,15 +93,8 @@ class FeedViewController: UICollectionViewController {
 
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Will return the number in sections(numberOfItemsInSection)
-        // in the frames width and the height specified
-        CGSize(width: view.frame.width, height: 120)
-    }
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        listOfTweets.count // Will render five cells
+        tweets.count // Will render five cells
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -101,6 +102,17 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
         guard let cell: TweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDENTIFIER, for: indexPath)
         as? TweetCell else { return TweetCell() }
 
+        // Populates the cell with the correct tweet in that index path
+        cell.tweet = tweets[indexPath.row]
+
         return cell
+    }
+
+    // Asks the delegate for the size of the specified item’s cell.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Will return the number in sections(numberOfItemsInSection)
+        // in the frames width and the height specified
+        CGSize(width: view.frame.width, height: 120)
     }
 }

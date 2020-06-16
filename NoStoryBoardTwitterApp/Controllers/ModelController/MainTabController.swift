@@ -62,7 +62,9 @@ class MainTabController: UITabBarController {
     /**©-------------------------------------------©*/
     
     func fetchUserFromDB() {
-        UserService.shared.fetchUser { (user: User) in
+        guard let uid = AUTH.currentUser?.uid else { return }
+
+        UserService.shared.fetchUser(uid: uid) { (user: User) in
             // The code wont execute until the user is actually fetched
             self.user = user// Passing our user computed property
             printf("DEBUG: Main tab user: \(user.username)")

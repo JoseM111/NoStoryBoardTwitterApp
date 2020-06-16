@@ -14,14 +14,14 @@ struct TweetService {
     /**©------------------------------------------------------------------------------©*/
     func uploadTweet(caption: String, completion: @escaping ErrorOrDBRef) {
         let zero: Int = 0
-        let timeStamp = Date.init()
+        let timeStamp = Int(NSDate().timeIntervalSince1970)
 
         // We need this uid because to know which user is trying to
         // post a tweet and the way we can know that is by there `id`
         guard let uid = AUTH.currentUser?.uid else { return }
 
         let tweetDictVals: [String: Any] = [ k.TweetUIDKey : uid,
-                                             k.TimestampKey : timeStamp.dateRightNow(),
+                                             k.TimestampKey : timeStamp,
                                              k.LikesKey : zero,
                                              k.RetweetsKey : zero,
                                              k.CaptionKey : caption ]
@@ -38,12 +38,18 @@ struct TweetService {
         // When ever a tweet is inputted it gets added instantly
         REF_TWEET.observe(.childAdded) { (snapShot) in
             guard let tweetsDict = snapShot.value as? [String : Any] else { return }
-            let tweetID = snapShot.key
-            let tweet = Tweet(tweetID: tweetID, dict: tweetsDict)
+            // Getting the correct user by uid
+            guard let uid = tweetsDict[k.TweetUIDKey] as? String else { return }
 
-            // Append the new tweet
-            addedTweets.append(tweet)
-            completion(addedTweets)
+            let tweetID = snapShot.key
+
+            // Will provide a user associated to each tweet
+            UserService.shared.fetchUser(uid: uid) { user in
+                let tweet = Tweet(user: user, tweetID: tweetID, dict: tweetsDict)
+                // Append the new tweet
+                addedTweets.append(tweet)
+                completion(addedTweets)
+            }
         }
     }
     /**©------------------------------------------------------------------------------©*/
