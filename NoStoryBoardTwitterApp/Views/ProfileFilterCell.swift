@@ -2,6 +2,12 @@ import UIKit
 
 class ProfileFilterCell: UICollectionViewCell {
 
+    //<--cell description property--? tweets/replies/likes
+    var option: ProfileFilterOptions? {
+        // Will set the option to the right index, when the label is selected
+        didSet { titleLbl.text = option?.description }
+    }
+
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
     //<--titleLbl
@@ -13,7 +19,11 @@ class ProfileFilterCell: UICollectionViewCell {
         return lbl
     }()
 
-    // Inherited
+    /* When the title label is selected for a cell,
+       the color of that label will be set to true
+       which will make the label in that cell change
+       colors to blue and keep the other to labels
+       in the other cells light gray and false. */
     override var isSelected: Bool {
         didSet {
             let boldFont: UIFont = UIFont.boldSystemFont(ofSize: 16)

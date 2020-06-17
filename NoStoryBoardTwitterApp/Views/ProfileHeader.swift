@@ -2,7 +2,7 @@ import UIKit
 
 class ProfileHeader: UICollectionReusableView {
 
-    internal let filterBar = ProfileFilterView()
+    internal let filterBarAnimationTransition = ProfileFilterView()
 
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
@@ -75,13 +75,19 @@ class ProfileHeader: UICollectionReusableView {
         return lbl
     }()
 
-
+    internal let underlineView: UIView = {
+        let uView = UIView()
+        uView.backgroundColor = .twitterBlue
+        return uView
+    }()
     /**©------------------------------------------------------------------------------©*/
 
     // MARK: _©Lifecycle-methods
     /**©-----------------------©*/
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        filterBarAnimationTransition.filterViewDelegate = self
 
         addSubview(containerView)
         containerView.anchorWith(top: topAnchor, left: leftAnchor, right: rightAnchor, height: 108)
@@ -122,9 +128,15 @@ class ProfileHeader: UICollectionReusableView {
         /**©-------------------------------------------©*/
 
         // Adding our filterBar/ProfileFilterView to the bottom of our profile header
-        addSubview(filterBar)
-        filterBar.anchorWith(left: leftAnchor, bottom: bottomAnchor,
-                             right: rightAnchor, height: 50)
+        // Adjust height if bar is to close or far when animated under the label cell
+        addSubview(filterBarAnimationTransition)
+        filterBarAnimationTransition.anchorWith(left: leftAnchor, bottom: bottomAnchor,
+                             right: rightAnchor, height: 35)
+
+        // Adding underlining view
+        addSubview(underlineView)
+        underlineView.anchorWith(left: leftAnchor, bottom: bottomAnchor,
+                                 width: frame.width / 3, height: 2)
     }
 
     required init?(coder: NSCoder) {
@@ -141,4 +153,18 @@ class ProfileHeader: UICollectionReusableView {
 
     }
     /**©-------------------------------------------©*/
+}
+
+extension ProfileHeader: ProfileFilterViewDelegate {
+
+    func animateFilterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
+        guard let cell: ProfileFilterCell = view.collectionView.cellForItem(at: indexPath)
+                as? ProfileFilterCell else { return }
+
+        let xPos: CGFloat = cell.frame.origin.x
+
+        UIView.animate(withDuration: 0.3) { () -> Void in
+            self.underlineView.frame.origin.x = xPos
+        }
+    }
 }
