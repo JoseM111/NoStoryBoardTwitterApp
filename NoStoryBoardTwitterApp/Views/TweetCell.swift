@@ -1,6 +1,15 @@
 import UIKit
 
+/* A protocol to handle when the user profile image is tapped in the cell,
+  which will forward the user to that profile view.  */
+protocol TweetCellDelegate: class {
+    func handleProfileImgTapped()
+}
+
 class TweetCell: UICollectionViewCell {
+
+    // MARK: #©delegate
+    weak var tweetCellDelegate: TweetCellDelegate?
 
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
@@ -9,8 +18,8 @@ class TweetCell: UICollectionViewCell {
         didSet { configureTweet() }
     }
 
-    // -->profileImgView
-    internal let profileImgView: UIImageView = {
+    // -->profileImgView must be a lazy var
+    internal lazy var profileImgView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -21,6 +30,14 @@ class TweetCell: UICollectionViewCell {
         // by 2. This only works when the width & the height are the same.
         iv.layer.cornerRadius = 52 / 2
         iv.backgroundColor = .twitterBlue
+
+        /* Adding a tap gesture recognizer:
+           Handles a tapping event on a none button. */
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleProfileImgTapped))
+        // Adding our gesture to the profileImgView
+        iv.addGestureRecognizer(tapGestureRecognizer)
+        // Not enabled by default
+        iv.isUserInteractionEnabled = true
 
         return iv
     }()
@@ -137,6 +154,11 @@ class TweetCell: UICollectionViewCell {
 
     // MARK: _#Selectors
     /**©-------------------------------------------©*/
+    // MARK: #©tap gesture recognizer
+    @objc func handleProfileImgTapped() {
+        tweetCellDelegate?.handleProfileImgTapped()
+    }
+    
     @objc func handleShareTapped() {
         
     }

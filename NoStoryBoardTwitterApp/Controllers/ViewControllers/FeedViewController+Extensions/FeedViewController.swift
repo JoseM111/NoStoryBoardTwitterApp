@@ -90,29 +90,3 @@ class FeedViewController: UICollectionViewController {
     }
     /**©-------------------------------------------©*/
 }
-
-extension FeedViewController: UICollectionViewDelegateFlowLayout {
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        tweets.count // Will render five cells
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell: TweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDENTIFIER, for: indexPath)
-        as? TweetCell else { return TweetCell() }
-
-        // Populates the cell with the correct tweet in that index path
-        cell.tweet = tweets[indexPath.row]
-
-        return cell
-    }
-
-    // Asks the delegate for the size of the specified item’s cell.
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Will return the number in sections(numberOfItemsInSection)
-        // in the frames width and the height specified
-        CGSize(width: view.frame.width, height: 120)
-    }
-}
