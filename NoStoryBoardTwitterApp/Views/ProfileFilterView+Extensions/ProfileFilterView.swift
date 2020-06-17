@@ -30,6 +30,11 @@ class ProfileFilterView: UIView {
 
         // Registering the ProfileFilterCell
         collectionView.register(ProfileFilterCell.self, forCellWithReuseIdentifier: PROFILE_FILTER_IDENTIFIER)
+
+        // So tweets is selected by default
+        let selectIndexPath = IndexPath(row: 0, section: 0)//<--isSelected = true on index 0 by default
+        collectionView.selectItem(at: selectIndexPath, animated: true, scrollPosition: .left)
+
         addSubview(collectionView)
         collectionView.addConstraintsToFillView(self)
     }
