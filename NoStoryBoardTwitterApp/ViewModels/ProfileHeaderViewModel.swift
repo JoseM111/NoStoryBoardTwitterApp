@@ -1,22 +1,43 @@
 import UIKit
 
-/* CaseIterable:--?
-   Types that conform to the CaseIterable protocol are typically
-   enumerations without associated values. When using a CaseIterable
-   type, you can access a collection of all of the type’s cases by
-   using the type’s allCases property. */
-enum ProfileFilterOptions: Int, CaseIterable {
-    // Mapping each one of these cases to a particular collection view cell
-    // All these cases will get a integer value
-    case tweets
-    case replies
-    case likes
+struct ProfileHeaderViewModel {
+    // MARK: _$typealiases
+    typealias NSAttrStr = NSAttributedString
+    typealias NSMutAttrStr = NSMutableAttributedString
 
-    var description: String {
-        switch self {
-        case .tweets: return "Tweets"
-        case .replies: return "Tweets & Replies"    
-        case .likes: return "Likes"
+    // MARK: _©Properties
+    internal let user: User
+
+    internal var followersStr: NSAttrStr? {
+        attrTextWith(value: 0, text: " Followers")
+    }
+
+    internal var followingStr: NSAttrStr? {
+        attrTextWith(value: 2, text: " Following")
+    }
+
+    internal var actionBtnTitle: String {
+        // If user is current user, then set to edit profile
+        // Else figure out following/ not following
+        if user.isCurrentUser {
+            return "Edit Profile"
+        } else {
+            return "Follow"
         }
+    }
+
+    init(user: User) {
+        self.user = user
+    }
+    
+    // Helper function
+    fileprivate func attrTextWith(value: Int, text: String) -> NSAttrStr {
+        let boldSystemFont: UIFont = UIFont.boldSystemFont(ofSize: 14)
+        let regSystemFont: UIFont = UIFont.systemFont(ofSize: 14)
+        let lightGray: UIColor = UIColor.lightGray
+
+        let attrTitle = NSMutAttrStr(string: "\(value)", attributes: [ .font : boldSystemFont ])
+        attrTitle.append(NSAttrStr(string: "\(text)", attributes: [ .font : regSystemFont, .foregroundColor :  lightGray ]))
+        return attrTitle
     }
 }

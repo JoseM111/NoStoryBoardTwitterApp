@@ -3,17 +3,33 @@ import UIKit
 class ProfileViewController: UICollectionViewController {
 
     // MARK: _©Properties
-    /**©------------------------------------------------------------------------------©*/
-
-
-    /**©------------------------------------------------------------------------------©*/
+    let user: User
 
     // MARK: _©Lifecycle-methods
     /**©-----------------------©*/
+    init(user: User) {
+        self.user = user
+
+        /* UICollectionViewFlowLayout():--?
+           A flow layout works with the collection view’s delegate object
+           to determine the size of items, headers, and footers in each
+           section and grid. That delegate object must conform to the
+           UICollectionViewDelegateFlowLayout protocol. Use of the delegate
+           allows you to adjust layout information dynamically. */
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureCollectionView()
+
+        printf("DEBUG: USER: \(user.username)")
     }
 
     // Every time our view will appear it will hide the navigation bar
@@ -31,7 +47,7 @@ class ProfileViewController: UICollectionViewController {
     // MARK: _#Selectors
     /**©-------------------------------------------©*/
     @objc func handleDismissal() {
-        
+
     }
     /**©-------------------------------------------©*/
 
@@ -60,7 +76,8 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     // MARK: _©overriding funcs
     /**©-------------------------------------------©*/
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        let result: Int = 3
+        return result
     }
 
     // Sets up our tweet cell
@@ -80,6 +97,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
                 .dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_IDENTIFIER, for: indexPath)
                 as? ProfileHeader else { return ProfileHeader() }
 
+        header.user = user
         return header
     }
 

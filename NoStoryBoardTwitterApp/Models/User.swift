@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 struct User {
     // MARK: #©Typealias-DictKeys
@@ -11,6 +12,9 @@ struct User {
     let username: String
     var profileImgURL: URL?
     let uid: String
+
+    // MARK: $Helper computed property to figure out current user
+    var isCurrentUser: Bool { AUTH.currentUser?.uid == uid }
 
     init(uid: String, dict: [String : AnyObject]) {
         self.uid = uid

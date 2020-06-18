@@ -4,8 +4,13 @@ class ProfileHeader: UICollectionReusableView {
 
     internal let filterBarAnimationTransition = ProfileFilterView()
 
+    var user: User? {
+        didSet { configureUserToSet() }
+    }
+
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
+    // -->containerView: UIView
     internal lazy var containerView: UIView = {
         let cView = UIView()
         cView.backgroundColor = .twitterBlue
@@ -17,6 +22,7 @@ class ProfileHeader: UICollectionReusableView {
         return cView
     }()
 
+    // -->backBtn: UIButton
     internal lazy var backBtn: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(named: "baseline_arrow_back_white_24dp")?.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -25,6 +31,7 @@ class ProfileHeader: UICollectionReusableView {
         return btn
     }()
 
+    // -->profileImgView: UIImageView
     internal lazy var profileImgView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -36,9 +43,9 @@ class ProfileHeader: UICollectionReusableView {
         return iv
     }()
 
+    // -->editProfileFollowBtn: UIButton
     internal lazy var editProfileFollowBtn: UIButton = {
         let btn = UIButton(type: .system)
-        btn.setTitle("Follow", for: .normal)
         btn.layer.borderColor = UIColor.twitterBlue.cgColor
         btn.layer.borderWidth = 1.25
 
@@ -48,6 +55,7 @@ class ProfileHeader: UICollectionReusableView {
         return btn
     }()
 
+    // -->fullnameLbl: UILabel
     internal let fullnameLbl: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 16)
@@ -56,6 +64,7 @@ class ProfileHeader: UICollectionReusableView {
         return lbl
     }()
 
+    // -->usernameLbl: UILabel
     internal let usernameLbl: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 16)
@@ -64,8 +73,7 @@ class ProfileHeader: UICollectionReusableView {
         return lbl
     }()
 
-
-
+    // -->bioLbl: UILabel
     internal let bioLbl: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 16)
@@ -75,10 +83,34 @@ class ProfileHeader: UICollectionReusableView {
         return lbl
     }()
 
+    // -->underlineView: UIView
     internal let underlineView: UIView = {
         let uView = UIView()
         uView.backgroundColor = .twitterBlue
         return uView
+    }()
+
+    // -->followingLabel: UILabel
+    internal let followingLbl: UILabel = {
+        let lbl = UILabel()
+        // Dummy text
+
+        let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowersTapped))
+        lbl.isUserInteractionEnabled = true
+        lbl.addGestureRecognizer(followTap)
+        return lbl
+    }()
+
+    // -->followingLabel: UILabel
+    internal let followersLbl:UILabel = {
+        let lbl = UILabel()
+        // Dummy text
+
+        let followTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowingTapped))
+        lbl.isUserInteractionEnabled = true
+        lbl.addGestureRecognizer(followTap)
+
+        return lbl
     }()
     /**©------------------------------------------------------------------------------©*/
 
@@ -124,14 +156,25 @@ class ProfileHeader: UICollectionReusableView {
         addSubview(vUserDetailStack)
         vUserDetailStack.anchorWith(top: profileImgView.bottomAnchor, left: leftAnchor, right: rightAnchor,
                                     paddingTop: 8, paddingLeft: 12, paddingRight: 12)
+        /**©-------------------------------------------©*/
 
+        // MARK: _#Following & Followers label in a hStack
+        /**©-------------------------------------------©*/
+        let hFollowStack = UIStackView(arrangedSubviews: [ followingLbl, followersLbl ])
+        hFollowStack.axis = .horizontal
+        hFollowStack.spacing = 8
+        hFollowStack.distribution = .fillEqually
+
+        addSubview(hFollowStack)
+        hFollowStack.anchorWith(top: vUserDetailStack.bottomAnchor, left: leftAnchor,
+                                paddingTop: 8, paddingLeft: 12)
         /**©-------------------------------------------©*/
 
         // Adding our filterBar/ProfileFilterView to the bottom of our profile header
         // Adjust height if bar is to close or far when animated under the label cell
         addSubview(filterBarAnimationTransition)
         filterBarAnimationTransition.anchorWith(left: leftAnchor, bottom: bottomAnchor,
-                             right: rightAnchor, height: 35)
+                                                right: rightAnchor, height: 35)
 
         // Adding underlining view
         addSubview(underlineView)
@@ -145,6 +188,14 @@ class ProfileHeader: UICollectionReusableView {
 
     // MARK: _#Selectors
     /**©-------------------------------------------©*/
+    @objc func handleFollowingTapped() {
+
+    }
+
+    @objc func handleFollowersTapped() {
+
+    }
+
     @objc func handleDismissal() {
 
     }
@@ -153,7 +204,26 @@ class ProfileHeader: UICollectionReusableView {
 
     }
     /**©-------------------------------------------©*/
-}
+    
+    // MARK: _#Helper
+    /**©-----------------------©*/
+    func configureUserToSet() {
+        guard let user = user else { return }
+        // Using our user to construct our view model
+        let profileHeaderViewModel = ProfileHeaderViewModel(user: user)
+
+        // Configuring the correct image for the profile
+        profileImgView.sd_setImage(with: user.profileImgURL)
+
+        /*  if user.isCurrentUser { return "Edit Profile" }
+                else { return "Follow" }                   */
+        editProfileFollowBtn.setTitle(profileHeaderViewModel.actionBtnTitle, for: .normal)
+
+        followersLbl.attributedText = profileHeaderViewModel.followersStr
+        followingLbl.attributedText = profileHeaderViewModel.followingStr
+    }
+    /**©-----------------------©*/
+}// END OF CLASS
 
 extension ProfileHeader: ProfileFilterViewDelegate {
 

@@ -35,11 +35,17 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension FeedViewController: TweetCellDelegate {
+
     // MARK: _©Stubs--> For TweetCellDelegate
     /**©-------------------------------------------©*/
-    func handleProfileImgTapped() {
+    // Will initialize the profile controller with the user associated
+    // with a tweet when that user tweets it from there account.
+    func handleProfileImgTapped(_ cell: TweetCell) {
+        // getting our user
+        guard let user: User = cell.tweet?.user else { return }
+
         /* When the image os tapped, it will forward you to the ProfileViewController  */
-        let profileController = ProfileViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let profileController = ProfileViewController(user: user)
         navigationController?.pushViewController(profileController, animated: true)
 
         printf("""

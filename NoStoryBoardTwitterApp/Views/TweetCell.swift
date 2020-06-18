@@ -3,7 +3,7 @@ import UIKit
 /* A protocol to handle when the user profile image is tapped in the cell,
   which will forward the user to that profile view.  */
 protocol TweetCellDelegate: class {
-    func handleProfileImgTapped()
+    func handleProfileImgTapped(_ cell: TweetCell)
 }
 
 class TweetCell: UICollectionViewCell {
@@ -156,7 +156,7 @@ class TweetCell: UICollectionViewCell {
     /**©-------------------------------------------©*/
     // MARK: #©tap gesture recognizer
     @objc func handleProfileImgTapped() {
-        tweetCellDelegate?.handleProfileImgTapped()
+        tweetCellDelegate?.handleProfileImgTapped(self)
     }
     
     @objc func handleShareTapped() {

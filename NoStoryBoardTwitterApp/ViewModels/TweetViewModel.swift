@@ -9,6 +9,8 @@ struct TweetViewModel {
         user.profileImgURL
     }
 
+
+
     var timeStamp: String {
         let formatter = DateComponentsFormatter()
         /*  Can render the time since tweet in the format time inside the array */
