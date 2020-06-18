@@ -1,5 +1,9 @@
 import UIKit
 
+protocol ProfileHeaderDelegate: class {
+    func handleDismissal()
+}
+
 class ProfileHeader: UICollectionReusableView {
 
     internal let filterBarAnimationTransition = ProfileFilterView()
@@ -7,6 +11,8 @@ class ProfileHeader: UICollectionReusableView {
     var user: User? {
         didSet { configureUserToSet() }
     }
+
+    weak var profileHeaderDelegate: ProfileHeaderDelegate?
 
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
@@ -197,7 +203,7 @@ class ProfileHeader: UICollectionReusableView {
     }
 
     @objc func handleDismissal() {
-
+        profileHeaderDelegate?.handleDismissal()
     }
 
     @objc func handleEditProfileFollow() {
