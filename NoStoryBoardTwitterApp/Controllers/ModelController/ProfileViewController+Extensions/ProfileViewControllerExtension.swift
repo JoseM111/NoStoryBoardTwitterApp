@@ -5,8 +5,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     // MARK: _©overriding funcs
     /**©-------------------------------------------©*/
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let result: Int = 3
-        return result
+        tweets.count
     }
 
     // Sets up our tweet cell
@@ -15,6 +14,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
         guard let cell: TweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDENTIFIER, for: indexPath)
                 as? TweetCell else { return TweetCell() }
 
+        cell.tweet = tweets[indexPath.row]
         return cell
     }
 
@@ -52,7 +52,11 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ProfileViewController: ProfileHeaderDelegate {
+
     func handleDismissal() {
+        /* Will pop the view back to the controller it came
+           from, once the back button is tapped. */
+        navigationController?.popViewController(animated: true)
         printf("DEBUG: Dismiss profile from ProfileController...")
     }
 }

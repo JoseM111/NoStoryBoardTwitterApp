@@ -65,7 +65,6 @@ class ProfileHeader: UICollectionReusableView {
     internal let fullnameLbl: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 16)
-        lbl.text = "Alias111"
         lbl.textColor = .lightGray
         return lbl
     }()
@@ -74,7 +73,6 @@ class ProfileHeader: UICollectionReusableView {
     internal let usernameLbl: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 16)
-        lbl.text = "@alias_one11"
         lbl.textColor = .lightGray
         return lbl
     }()
@@ -227,6 +225,10 @@ class ProfileHeader: UICollectionReusableView {
 
         followersLbl.attributedText = profileHeaderViewModel.followersStr
         followingLbl.attributedText = profileHeaderViewModel.followingStr
+
+        // Configuring the correct name of the user when clicking on there image
+        fullnameLbl.text = user.fullname
+        usernameLbl.text = profileHeaderViewModel.usernameText
     }
     /**©-----------------------©*/
 }// END OF CLASS

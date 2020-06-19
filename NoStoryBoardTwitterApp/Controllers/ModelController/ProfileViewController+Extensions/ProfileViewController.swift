@@ -5,6 +5,17 @@ class ProfileViewController: UICollectionViewController {
     // MARK: _©Properties
     let user: User
 
+    // MARK: #©Data-source
+    internal var tweets: [Tweet] = [] {
+        /* As soon as this property is set we want it to
+           reload its data, to render whats in the database.
+           We Have to run this for `numberOfItemsInSection`
+           to work in the `extension` of `FeedViewController`
+           Will render sections depending on the number of
+           tweets in the firebase database. */
+        didSet { collectionView.reloadData() }
+    }
+
     // MARK: _©Lifecycle-methods
     /**©-----------------------©*/
     init(user: User) {
@@ -28,8 +39,7 @@ class ProfileViewController: UICollectionViewController {
         super.viewDidLoad()
 
         configureCollectionView()
-
-        printf("DEBUG: USER: \(user.username)")
+        fetchTweets()
     }
 
     // Every time our view will appear it will hide the navigation bar
@@ -44,8 +54,18 @@ class ProfileViewController: UICollectionViewController {
 
     /**©-----------------------©*/
 
-    // MARK: _#Selectors
+    // MARK: _#API
     /**©-------------------------------------------©*/
+    func fetchTweets() {
+        TweetService.shared.fetchTweetsFor(user: user) { (tweets: [Tweet]) in
+            self.tweets = tweets
+
+            printf("""
+                   DEBUG: SUCCESS!..
+                   Number of tweets: \(tweets.count)
+                   """)
+        }
+    }
 
     /**©-------------------------------------------©*/
 

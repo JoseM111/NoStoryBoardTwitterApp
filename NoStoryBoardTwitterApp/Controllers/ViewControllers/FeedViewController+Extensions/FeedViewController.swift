@@ -36,6 +36,16 @@ class FeedViewController: UICollectionViewController {
         configureUI()
         fetchTweet()
     }
+
+    // Every time our view will appear it will hide the navigation bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Will make the top bar with the time and battery life to white
+        navigationController?.navigationBar.barStyle = .default
+        // Reverts nav bar to the state prior to going to the profile controller
+        navigationController?.navigationBar.isHidden = false
+    }
     /**©-----------------------©*/
 
     // MARK: _#API

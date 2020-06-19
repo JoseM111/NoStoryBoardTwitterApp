@@ -14,6 +14,8 @@ let DATABASE_REF_CHILD: DatabaseReference = Database.database().reference().chil
 // TWEET CONSTANTS
 let TWEET: String = "tweet"
 let REF_TWEET: DatabaseReference = DATABASE_REF_CHILD.child(TWEET)
+let USERTWEETS: String = "user-tweets"
+let REF_USER_TWEETS: DatabaseReference = DATABASE_REF_CHILD.child(USERTWEETS)
 
 // REUSABLE-CELL
 let REUSE_IDENTIFIER: String = "TweetCell"

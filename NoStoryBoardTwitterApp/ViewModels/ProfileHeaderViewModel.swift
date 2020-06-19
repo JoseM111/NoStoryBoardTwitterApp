@@ -8,6 +8,8 @@ struct ProfileHeaderViewModel {
     // MARK: _©Properties
     internal let user: User
 
+    internal let usernameText: String
+
     internal var followersStr: NSAttrStr? {
         attrTextWith(value: 0, text: " Followers")
     }
@@ -28,6 +30,7 @@ struct ProfileHeaderViewModel {
 
     init(user: User) {
         self.user = user
+        self.usernameText = "@\(user.username)"
     }
     
     // Helper function
