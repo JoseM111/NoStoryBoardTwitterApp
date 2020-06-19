@@ -2,6 +2,10 @@ import UIKit
 
 class UserCell: UITableViewCell {
 
+    var user: User? {
+        didSet { configureUser() }
+    }
+
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
     // -->profileImgView must be a lazy var
@@ -75,6 +79,14 @@ class UserCell: UITableViewCell {
 
     // MARK: _©Helper-methods
     /**©-------------------------------------------©*/
+    func configureUser() {
+        guard let user = user else { return }
 
+        // Configuring our user cell when the explore tab is tapped
+        profileImgView.sd_setImage(with: user.profileImgURL)
+        usernameLbl.text = user.username
+        fullnameLbl.text = user.fullname
+
+    }
     /**©-------------------------------------------©*/
 }// END OF CLASS

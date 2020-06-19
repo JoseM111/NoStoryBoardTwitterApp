@@ -4,7 +4,23 @@ class ExploreViewController: UITableViewController {
 
     // MARK: _©Properties
     /**©------------------------------------------------------------------------------©*/
+    // MARK: _$Source-of-truth
+    internal var listOfUsers = [User]() {
+        didSet { tableView.reloadData() }
+    }
 
+    // MARK: _$Source-of-truth
+    internal var filteredUsers = [User]() {
+        didSet { tableView.reloadData() }
+    }
+
+    internal var inSearchMode: Bool {
+        searchController.isActive
+                && !(searchController.searchBar.text?.isEmpty ?? false)
+    }
+
+    // Creating a search controller to filter through the users
+    internal let searchController = UISearchController(searchResultsController: nil)
     /**©------------------------------------------------------------------------------©*/
 
     // MARK: _©Lifecycle-methods
@@ -13,12 +29,22 @@ class ExploreViewController: UITableViewController {
         super.viewDidLoad()
 
         configureUI()
+        fetchUsers()
+        configureSearchController()
     }
     /**©-----------------------©*/
 
-    // MARK: _#Selectors
+    // MARK: _#API
     /**©-------------------------------------------©*/
+    func fetchUsers() {
+        UserService.shared.fetchListOfUsers { (users: [User]) in
+            self.listOfUsers = users
 
+//            for user in users {
+//                printf("User: \(user.username)")
+//            }
+        }
+    }
     /**©-------------------------------------------©*/
 
     // MARK: _©Helper-methods
@@ -35,15 +61,26 @@ class ExploreViewController: UITableViewController {
         // Removes the separators in the table view
         tableView.separatorStyle = .none
     }
+    
+    func configureSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+
+        // Place holder text for the search bar
+        searchController.searchBar.placeholder = "Search for user...".lowercased()
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
+    }
     /**©-------------------------------------------©*/
 
 }// END OF CLASS
 
-extension ExploreViewController {
+extension ExploreViewController: UISearchResultsUpdating {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        10
+        let filterSearch = inSearchMode ? filteredUsers.count : listOfUsers.count
+        return filterSearch
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,6 +88,21 @@ extension ExploreViewController {
         guard let cell: UserCell = tableView.dequeueReusableCell(withIdentifier: USER_IDENTIFIER, for: indexPath)
                 as? UserCell else { return UserCell() }
 
+        let users = inSearchMode ? filteredUsers[indexPath.row] : listOfUsers[indexPath.row]
+
+        // Must be set to render the cell with the
+        // proper user data in the explore cell
+        cell.user = users
         return cell
+    }
+
+    // MARK: #©Func from-->UISearchResultsUpdating
+    public func updateSearchResults(for searchController: UISearchController) {
+
+        guard let searchText = searchController.searchBar.text?.lowercased() else { return }
+        /* Returns a new collection of the same type containing, in order, the
+           elements of the original collection that satisfy the given predicate. */
+        filteredUsers = listOfUsers.filter { $0.username.contains(searchText)  }
+
     }
 }

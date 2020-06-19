@@ -63,7 +63,7 @@ struct AuthService {
 
                     // Updating database
                     printf("Reached database call--> .updateChildValues(dictData)...")
-                    DATABASE_REF_CHILD.child(uid).updateChildValues(dictData, withCompletionBlock: completion)
+                    REF_USERS.child(uid).updateChildValues(dictData, withCompletionBlock: completion)
 
                     printf("""
                            DEBUG: User ID: \(uid)
