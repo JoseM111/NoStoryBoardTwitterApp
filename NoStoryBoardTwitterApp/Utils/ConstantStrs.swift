@@ -21,3 +21,4 @@ let REF_USER_TWEETS: DatabaseReference = DATABASE_REF_CHILD.child(USERTWEETS)
 let REUSE_IDENTIFIER: String = "TweetCell"
 let HEADER_IDENTIFIER: String = "ProfileHeader"
 let PROFILE_FILTER_IDENTIFIER: String = "ProfileFilterCell"
+let USER_IDENTIFIER: String = "UserCell"

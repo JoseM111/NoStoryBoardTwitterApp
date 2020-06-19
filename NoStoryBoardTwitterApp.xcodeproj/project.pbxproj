@@ -33,6 +33,7 @@
 		9EEA7BA905473597A79587BA /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7962157E5D81AA2224E6 /* ExploreViewController.swift */; };
 		9EEA7BC3F6D7597697A999B9 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA70F326C6480908320A56 /* UserService.swift */; };
 		9EEA7BD89A2718B61CB0E9CD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7C853017A97191BC5C46 /* LoginViewController.swift */; };
+		9EEA7C36BD94F394FB6CA0DF /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7E337EBFC4D1C9443E98 /* UserCell.swift */; };
 		9EEA7C467F08E8D56832C63A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA765CAA6853E612CACE39 /* ProfileViewController.swift */; };
 		9EEA7D0135D11E2CD7E5BC5C /* ProfileFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7102004C175ED1954E51 /* ProfileFilterView.swift */; };
 		9EEA7D519CFD4E8232AA0BD1 /* ProfileFilterViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA717BDADE67B8D840061E /* ProfileFilterViewExtensions.swift */; };
@@ -77,6 +78,7 @@
 		9EEA7BCF05BA5755A93E4FE9 /* ConstantStrs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantStrs.swift; sourceTree = "<group>"; };
 		9EEA7C853017A97191BC5C46 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9EEA7C8EB5A808DDF51F73C0 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		9EEA7E337EBFC4D1C9443E98 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		9EEA7EF91CADDA53E2D81C18 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9EEA7FC20A351392B157BACE /* FeedViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewControllerExtensions.swift; sourceTree = "<group>"; };
 		9EEA7FD6BF602C072C88EEB6 /* ProfileViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				9EEA7AB83A802B1C882B4AD5 /* ProfileHeader.swift */,
 				9EEA74FAC30C4FB270BCC8AA /* ProfileFilterCell.swift */,
 				9EEA75CE28F44F4778C3B6BC /* ProfileFilterView+Extensions */,
+				9EEA7E337EBFC4D1C9443E98 /* UserCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				9EEA7719DD43817D36D16E32 /* ProfileFilterOptions.swift in Sources */,
 				9EEA7C467F08E8D56832C63A /* ProfileViewController.swift in Sources */,
 				9EEA79FC9B105CD924B5CDB9 /* ProfileViewControllerExtension.swift in Sources */,
+				9EEA7C36BD94F394FB6CA0DF /* UserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
