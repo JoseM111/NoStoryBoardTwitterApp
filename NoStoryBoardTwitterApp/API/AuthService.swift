@@ -14,6 +14,7 @@ struct AuthService {
 
     // MARK: #©loginUser
     func loginUserWith(email: String, pwd: String, completion: AuthDataResultCallback?) {
+
         AUTH.signIn(withEmail: email, password: pwd, completion: completion)
         printf("""
                Email: \(email)

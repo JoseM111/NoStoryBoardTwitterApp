@@ -28,7 +28,6 @@ class UserCell: UITableViewCell {
     internal let usernameLbl: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.boldSystemFont(ofSize: 14)
-        lbl.text = "Username"
 
         return lbl
     }()
@@ -37,7 +36,6 @@ class UserCell: UITableViewCell {
     internal let fullnameLbl: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 14)
-        lbl.text = "Fullname"
 
         return lbl
     }()
@@ -71,11 +69,6 @@ class UserCell: UITableViewCell {
     }
 
     /**©-----------------------©*/
-
-    // MARK: _#Selectors
-    /**©-------------------------------------------©*/
-
-    /**©-------------------------------------------©*/
 
     // MARK: _©Helper-methods
     /**©-------------------------------------------©*/

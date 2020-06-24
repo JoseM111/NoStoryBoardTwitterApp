@@ -64,7 +64,7 @@ class FeedViewController: UICollectionViewController {
         view.backgroundColor = .white
 
         // Collection view
-        collectionView.register(TweetCell.self, forCellWithReuseIdentifier: REUSE_IDENTIFIER)
+        collectionView.register(TweetCell.self, forCellWithReuseIdentifier: TWEET_IDENTIFIER)
         collectionView.backgroundColor = .white
 
         // Setup our twitter logo at the top of the nav bar

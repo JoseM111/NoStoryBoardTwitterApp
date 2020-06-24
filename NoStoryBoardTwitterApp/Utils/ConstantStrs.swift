@@ -8,9 +8,13 @@ let STORAGE_PROFILE_IMAGES: StorageReference = STORAGE_REF.child(PROFILE_IMG)
 
 // CREATE USER TO FIREBASE
 let AUTH: Auth = Auth.auth()
-let USERS: String = "users" 
-let REF_USERS: DatabaseReference = Database.database().reference().child(USERS)
-// DATABASE_REF_CHILD
+let USERS: String = "users"
+let DB_REF: DatabaseReference = Database.database().reference()
+let REF_USERS: DatabaseReference = DB_REF.child(USERS)
+let USERFOLLOWING: String = "user-following"
+let USERFOLLOWERS: String = "user-followers"
+let REF_USER_FOLLOWING: DatabaseReference = DB_REF.child(USERFOLLOWING)
+let REF_USER_FOLLOWERS: DatabaseReference = DB_REF.child(USERFOLLOWERS)
 
 // TWEET CONSTANTS
 let TWEET: String = "tweet"
@@ -19,7 +23,8 @@ let USERTWEETS: String = "user-tweets"
 let REF_USER_TWEETS: DatabaseReference = REF_USERS.child(USERTWEETS)
 
 // REUSABLE-CELL
-let REUSE_IDENTIFIER: String = "TweetCell"
-let HEADER_IDENTIFIER: String = "ProfileHeader"
+let TWEET_IDENTIFIER: String = "TweetCell"
+let PROFILE_HEADER_IDENTIFIER: String = "ProfileHeader"
 let PROFILE_FILTER_IDENTIFIER: String = "ProfileFilterCell"
 let USER_IDENTIFIER: String = "UserCell"
+let TWEET_HEADER_IDENTIFIER: String = "TweetHeader"

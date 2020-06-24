@@ -49,18 +49,4 @@ class ProfileFilterCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-
-    /**©-----------------------©*/
-
-    // MARK: _#Selectors
-    /**©-------------------------------------------©*/
-
-    /**©-------------------------------------------©*/
-
-    // MARK: _©Helper-methods
-    /**©-------------------------------------------©*/
-
-
-    /**©-------------------------------------------©*/
 }

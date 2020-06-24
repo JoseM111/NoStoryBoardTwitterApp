@@ -3,7 +3,7 @@ import UIKit
 class ProfileViewController: UICollectionViewController {
 
     // MARK: _©Properties
-    let user: User
+    var user: User
 
     // MARK: #©Data-source
     internal var tweets: [Tweet] = [] {
@@ -40,6 +40,8 @@ class ProfileViewController: UICollectionViewController {
 
         configureCollectionView()
         fetchTweets()
+        checkIfUserIsFollowed()
+        fetchUserStats()
     }
 
     // Every time our view will appear it will hide the navigation bar
@@ -66,7 +68,20 @@ class ProfileViewController: UICollectionViewController {
                    """)
         }
     }
-
+    
+    func checkIfUserIsFollowed() {
+        UserService.shared.checkIfUserIsFollowed(uid: user.uid) { (isFollowed: Bool) in
+            self.user.isFollowed = isFollowed
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func fetchUserStats() {
+        UserService.shared.fetchUserStats(uid: user.uid) { (stats: UserRelationsStats) in
+            self.user.stats = stats
+            self.collectionView.reloadData()
+        }
+    }
     /**©-------------------------------------------©*/
 
     // MARK: _©Helper-methods
@@ -77,11 +92,11 @@ class ProfileViewController: UICollectionViewController {
         // Will place the header all the way to the top of the screen
         collectionView.contentInsetAdjustmentBehavior = .never
 
-        collectionView.register(TweetCell.self, forCellWithReuseIdentifier: REUSE_IDENTIFIER)
+        collectionView.register(TweetCell.self, forCellWithReuseIdentifier: TWEET_IDENTIFIER)
         // Registering our ProfileHeader
         collectionView.register(ProfileHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: HEADER_IDENTIFIER)
+                                withReuseIdentifier: PROFILE_HEADER_IDENTIFIER)
     }
     /**©-------------------------------------------©*/
 }// END OF CLASS

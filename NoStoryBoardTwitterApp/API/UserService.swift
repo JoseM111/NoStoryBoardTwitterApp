@@ -6,6 +6,7 @@ struct UserService {
     static let shared = UserService()
     // MARK: #©Type-alias DictKeys
     typealias k = DictKeys
+    typealias ErrorOrDBRef = (Error?, DatabaseReference) -> Void
 
     // MARK: _©API-Methods
     /**©------------------------------------------------------------------------------©*/
@@ -36,6 +37,64 @@ struct UserService {
             // Append user
             listOfUsers.append(user)
             completion(listOfUsers)
+        }
+    }
+
+    func followUser(uid: String, completion: @escaping ErrorOrDBRef) {
+        // __________
+        guard let currentUID = AUTH.currentUser?.uid else { return }
+
+        REF_USER_FOLLOWING.child(currentUID).updateChildValues([uid : 1]) { (error, _) in
+            // __________
+            if let error = error {
+                return printf("""
+                              [ERROR] Could not update data...
+                              \(error.localizedDescription)
+                              """)
+            }
+
+            REF_USER_FOLLOWERS.child(uid).updateChildValues([currentUID : 1], withCompletionBlock: completion)
+        }
+    }
+
+    func unfollowUser(uid: String, completion: @escaping ErrorOrDBRef) {
+        // __________
+        guard let currentUID = AUTH.currentUser?.uid else { return }
+
+        REF_USER_FOLLOWING.child(currentUID).child(uid).removeValue { (error, ref) in
+            // __________
+            if let error = error {
+                return printf("""
+                              [ERROR] Could not update data...
+                              \(error.localizedDescription)
+                              """)
+            }
+
+            REF_USER_FOLLOWERS.child(uid).child(currentUID).removeValue(completionBlock: completion)
+        }
+    }
+    
+    func checkIfUserIsFollowed(uid: String, completion: @escaping (Bool) -> Void) {
+        // __________
+        guard let currentUID = AUTH.currentUser?.uid else { return }
+
+        REF_USER_FOLLOWING.child(currentUID).child(uid).observeSingleEvent(of: .value) { snapShot in
+            printf("DEBUG: User is followed: \(snapShot.exists())")
+            completion(snapShot.exists())
+        }
+    }
+    
+    func fetchUserStats(uid: String, completion: @escaping (UserRelationsStats) -> Void) {
+        // Will return the number of users following
+        REF_USER_FOLLOWERS.child(uid).observeSingleEvent(of: .value) { snapShot in
+            let followers = snapShot.children.allObjects.count
+
+            REF_USER_FOLLOWING.child(uid).observeSingleEvent(of: .value) { snapShot in
+                let following = snapShot.children.allObjects.count
+
+                let stats = UserRelationsStats(followers: followers, following: following)
+                completion(stats)
+            }
         }
     }
     /**©------------------------------------------------------------------------------©*/

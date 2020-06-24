@@ -18,12 +18,14 @@
 		9EEA74E6188EB2FDFA7311F1 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA731B53AD919FC90BD62A /* MainTabController.swift */; };
 		9EEA74F552CADBA686C12353 /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA733D4C5E4D7B2ABD1697 /* TweetService.swift */; };
 		9EEA75D47F2A0D72B6C2CBB7 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA769F44EA68F70679413F /* TweetCell.swift */; };
+		9EEA75E81B06149A431D0451 /* TweetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7FCE38A8DD4D3035D34A /* TweetController.swift */; };
 		9EEA7719DD43817D36D16E32 /* ProfileFilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7FF6431393F8AD8F94B2 /* ProfileFilterOptions.swift */; };
 		9EEA77FA026CDC26212A8681 /* ConvoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7BA11585FEFC93E4DED5 /* ConvoViewController.swift */; };
 		9EEA780654506AE9BADCB3D2 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7811859BB2917ED51146 /* NotificationViewController.swift */; };
 		9EEA7898940C37357ED30E76 /* FeedViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7FC20A351392B157BACE /* FeedViewControllerExtensions.swift */; };
 		9EEA7918640101B4CA0AA59E /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7AB83A802B1C882B4AD5 /* ProfileHeader.swift */; };
 		9EEA7923AEDFD4D9D1FD7AB8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA77E8B1947435FED772B8 /* RegistrationViewController.swift */; };
+		9EEA792B4680CDA59C0F3A75 /* TweetHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA76985F41EF8053BE0531 /* TweetHeader.swift */; };
 		9EEA79AD80F7BDFD38698CF7 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA77940DD569FD2B900854 /* ProfileHeaderViewModel.swift */; };
 		9EEA79FC9B105CD924B5CDB9 /* ProfileViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7FD6BF602C072C88EEB6 /* ProfileViewControllerExtension.swift */; };
 		9EEA7AC1D07436AB7A8084C1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA7EF91CADDA53E2D81C18 /* User.swift */; };
@@ -64,6 +66,7 @@
 		9EEA759977C0D44E39E43EB9 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		9EEA762EA5012E56A78DD328 /* DictKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictKeys.swift; sourceTree = "<group>"; };
 		9EEA765CAA6853E612CACE39 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9EEA76985F41EF8053BE0531 /* TweetHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetHeader.swift; sourceTree = "<group>"; };
 		9EEA769F44EA68F70679413F /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		9EEA77940DD569FD2B900854 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		9EEA77E8B1947435FED772B8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		9EEA7E337EBFC4D1C9443E98 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		9EEA7EF91CADDA53E2D81C18 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9EEA7FC20A351392B157BACE /* FeedViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewControllerExtensions.swift; sourceTree = "<group>"; };
+		9EEA7FCE38A8DD4D3035D34A /* TweetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetController.swift; sourceTree = "<group>"; };
 		9EEA7FD6BF602C072C88EEB6 /* ProfileViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerExtension.swift; sourceTree = "<group>"; };
 		9EEA7FF6431393F8AD8F94B2 /* ProfileFilterOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFilterOptions.swift; sourceTree = "<group>"; };
 		AB1CB040248D7685006F76C8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -163,6 +167,7 @@
 				9EEA731B53AD919FC90BD62A /* MainTabController.swift */,
 				9EEA7193B522C6AD9AA007B5 /* UploadTweetViewController.swift */,
 				9EEA75186BB25D50F387CDB8 /* ProfileViewController+Extensions */,
+				9EEA7FCE38A8DD4D3035D34A /* TweetController.swift */,
 			);
 			path = ModelController;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 				9EEA74FAC30C4FB270BCC8AA /* ProfileFilterCell.swift */,
 				9EEA75CE28F44F4778C3B6BC /* ProfileFilterView+Extensions */,
 				9EEA7E337EBFC4D1C9443E98 /* UserCell.swift */,
+				9EEA76985F41EF8053BE0531 /* TweetHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -458,6 +464,8 @@
 				9EEA7C467F08E8D56832C63A /* ProfileViewController.swift in Sources */,
 				9EEA79FC9B105CD924B5CDB9 /* ProfileViewControllerExtension.swift in Sources */,
 				9EEA7C36BD94F394FB6CA0DF /* UserCell.swift in Sources */,
+				9EEA75E81B06149A431D0451 /* TweetController.swift in Sources */,
+				9EEA792B4680CDA59C0F3A75 /* TweetHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

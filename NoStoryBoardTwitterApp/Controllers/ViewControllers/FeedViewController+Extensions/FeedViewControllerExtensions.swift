@@ -8,7 +8,7 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        guard let cell: TweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDENTIFIER, for: indexPath)
+        guard let cell: TweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: TWEET_IDENTIFIER, for: indexPath)
                 as? TweetCell else { return TweetCell() }
 
         // You have to set your delegate or it will be equal to nil
@@ -20,9 +20,14 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
         return cell
     }
 
+    // Will push the feed controller, when a message is clicked to the tweet controller
     public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-
+        /* super.init(collectionViewLayout: UICollectionViewFlowLayout()) was called in the
+         tweet controller a tweet is needed to be passed for the view controller to be pushed
+         There is no need to create a tweet instance, since your indexPath provides
+         a [tweets] array in the feed controller. */
+        let tweetController: TweetController = TweetController(tweet: tweets[indexPath.row])
+        navigationController?.pushViewController(tweetController, animated: true)
     }
 
     // Asks the delegate for the size of the specified item’s cell.

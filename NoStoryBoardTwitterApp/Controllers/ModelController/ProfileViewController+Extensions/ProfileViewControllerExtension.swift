@@ -2,7 +2,6 @@ import UIKit
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 
-    // MARK: _©overriding funcs
     /**©-------------------------------------------©*/
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         tweets.count
@@ -11,7 +10,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     // Sets up our tweet cell
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        guard let cell: TweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDENTIFIER, for: indexPath)
+        guard let cell: TweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: TWEET_IDENTIFIER, for: indexPath)
                 as? TweetCell else { return TweetCell() }
 
         cell.tweet = tweets[indexPath.row]
@@ -23,7 +22,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
                                  at indexPath: IndexPath) -> UICollectionReusableView {
 
         guard let header: ProfileHeader = collectionView
-                .dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_IDENTIFIER, for: indexPath)
+                .dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PROFILE_HEADER_IDENTIFIER, for: indexPath)
                 as? ProfileHeader else { return ProfileHeader() }
 
         header.user = user
@@ -52,6 +51,27 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ProfileViewController: ProfileHeaderDelegate {
+
+    func handleEditProfileFollow(_ header: ProfileHeader) {
+        // __________
+        if user.isCurrentUser {
+            return printf("DEBUG: Showing edit profile controller...")
+        }
+
+        if user.isFollowed {
+            UserService.shared.unfollowUser(uid: user.uid) { _, _ in
+                self.user.isFollowed = false
+                // Reloads and runs all the functions again
+                self.collectionView.reloadData()
+            }
+        } else {
+            UserService.shared.followUser(uid: user.uid) { _, _ in
+                self.user.isFollowed = true
+                // Reloads and runs all the functions again
+                self.collectionView.reloadData()
+            }
+        }
+    }
 
     func handleDismissal() {
         /* Will pop the view back to the controller it came

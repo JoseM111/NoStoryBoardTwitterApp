@@ -13,6 +13,9 @@ struct User {
     var profileImgURL: URL?
     let uid: String
 
+    var isFollowed: Bool = false
+    var stats: UserRelationsStats?
+
     // MARK: $Helper computed property to figure out current user
     var isCurrentUser: Bool { AUTH.currentUser?.uid == uid }
 
@@ -29,4 +32,11 @@ struct User {
             self.profileImgURL = imgURL
         }
     }
+}
+
+// MARK: #©Helper Object
+struct UserRelationsStats {
+    // MARK: _©Properties
+    var followers: Int
+    var following: Int
 }

@@ -46,7 +46,6 @@ class TweetCell: UICollectionViewCell {
     internal let captionLbl: UILabel = {
         let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 14)
-        lbl.text = "Some caption text"
         // Gives our label an infinite number of lines
         lbl.numberOfLines = 0
 
@@ -124,7 +123,6 @@ class TweetCell: UICollectionViewCell {
 
         // -->Custom-Label
         infoLbl.font = UIFont.systemFont(ofSize: 14)
-        infoLbl.text = "Just do it @Nike"
         /**©-------------------------------------------©*/
         // MARK: _©Action Stack
         let actionHStack = UIStackView(arrangedSubviews: [ commentBtn, retweetBtn,

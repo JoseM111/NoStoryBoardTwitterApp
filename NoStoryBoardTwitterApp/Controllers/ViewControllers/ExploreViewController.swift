@@ -32,6 +32,16 @@ class ExploreViewController: UITableViewController {
         fetchUsers()
         configureSearchController()
     }
+
+    // Every time our view will appear it will hide the navigation bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Will make the top bar with the time and battery life to white
+        navigationController?.navigationBar.barStyle = .default
+        // Reverts nav bar to the state prior to going to the profile controller
+        navigationController?.navigationBar.isHidden = false
+    }
     /**©-----------------------©*/
 
     // MARK: _#API
@@ -88,12 +98,20 @@ extension ExploreViewController: UISearchResultsUpdating {
         guard let cell: UserCell = tableView.dequeueReusableCell(withIdentifier: USER_IDENTIFIER, for: indexPath)
                 as? UserCell else { return UserCell() }
 
-        let users = inSearchMode ? filteredUsers[indexPath.row] : listOfUsers[indexPath.row]
+        let users: User = inSearchMode ? filteredUsers[indexPath.row] : listOfUsers[indexPath.row]
 
         // Must be set to render the cell with the
         // proper user data in the explore cell
         cell.user = users
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        // Grabs the correct user, based on weather or not we are in search mode
+        let users: User = inSearchMode ? filteredUsers[indexPath.row] : listOfUsers[indexPath.row]
+        let profileViewController = ProfileViewController(user: users)
+        navigationController?.pushViewController(profileViewController, animated: true)
     }
 
     // MARK: #©Func from-->UISearchResultsUpdating
@@ -102,7 +120,8 @@ extension ExploreViewController: UISearchResultsUpdating {
         guard let searchText = searchController.searchBar.text?.lowercased() else { return }
         /* Returns a new collection of the same type containing, in order, the
            elements of the original collection that satisfy the given predicate. */
-        filteredUsers = listOfUsers.filter { $0.username.contains(searchText)  }
+        filteredUsers = listOfUsers.filter { $0.username.contains(searchText) }
 
     }
+
 }
