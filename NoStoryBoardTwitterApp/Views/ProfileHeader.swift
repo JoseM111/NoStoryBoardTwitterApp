@@ -65,8 +65,7 @@ class ProfileHeader: UICollectionReusableView {
     // -->fullnameLbl: UILabel
     internal let fullnameLbl: UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 16)
-        lbl.textColor = .lightGray
+        lbl.font = UIFont.boldSystemFont(ofSize: 16)
         return lbl
     }()
 
